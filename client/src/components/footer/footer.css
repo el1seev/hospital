@@ -1,0 +1,114 @@
+.footer
+{
+  background: #545454;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.footer-tel
+{
+  padding-left: 5px;
+  display: flex;
+  justify-content: space-evenly;
+  text-align: left;
+  width: 1150px;
+  height: 123.03px;
+  margin: 0;
+}
+
+.footer-tel-info
+{
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  color: #7DC07F;
+  text-transform: uppercase;
+  -webkit-text-stroke: 0.5px #ffffff;
+  font-size: calc(14px + 2 * (100vw/ 1440));
+  padding-right: 10px;
+}
+
+  .tel
+{
+  margin-left: 5px;
+}
+
+.footer-info
+{
+  padding-right: 5px;
+}
+
+.footer-nav
+{
+  display: flex;
+  text-align: left;
+}
+
+.info, .info a
+{
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  -webkit-text-stroke: 0.5px #9c9c9c;
+  font-size: calc(14px + 2 * (100vw/ 1440))
+}
+
+.info
+{
+  color: #ffffff;
+}
+
+
+.footer-schedule
+{
+  text-align: center;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 19px;
+  color: #ffffff;
+  -webkit-text-stroke: 0.5px #9c9c9c;
+  font-weight: 700;
+  font-size: calc(14px + 2 * (100vw/ 1440))
+}
+
+.footer-schedule p
+{
+  margin: 3px;
+}
+
+.footer-schedule p span
+{
+  color: #E66565;
+}
+
+.foot-tel-mobview
+{
+  display: none;
+}
+
+@media screen and (max-width: 1110px) {
+  .footer
+  {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .footer-tel, .footer-nav
+  {
+    display: none;
+  }
+  .foot-tel-mobview
+  {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer-tel-info
+  {
+    margin-bottom: 5px;
+  }
+}

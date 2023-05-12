@@ -1,0 +1,95 @@
+.App
+{
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 100%;
+}
+
+.App-header
+{
+  height: 100px;
+  z-index: 100;
+  width: 100%;
+}
+
+.App-main
+{
+  background-color: #ffffff;
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.App-footer
+{
+  display: block;
+  height: 180px;
+}
+
+.modal-nav
+{
+  display: block;
+  position: relative;
+  overflow: auto;
+  background-color: #1a1919;
+  transition: all 0.3s ease 0s;
+  top: -100%;
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+  height: 0px;
+  opacity: 0.97;
+}
+
+.modal-nav.aсtive
+{
+  display: block;
+  top: 90px;
+  height: 100vh;
+}
+
+.modal-nav ul
+{
+  position: relative;
+  z-index: 2;
+}
+
+.modal-nav.aсtive .list-child
+{
+  margin-bottom: 40px;
+  margin-left: 0px;
+  opacity: 1;
+}
+
+.modal-nav.aсtive .nav-link
+{
+  font-size: calc(30px + 5 * (100vw/ 1440));
+}
+
+
+.modal-nav.aсtive ul
+{
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin: 0;
+}
+
+@media screen and (max-width: 1098px) {
+  ._icon2_1nzov_206
+  {
+    height: 54px;
+    width: 40px;
+  }
+}
+
+@media (max-width: 368px) {
+  .App-footer
+  {
+    height: 220px;
+  }
+}

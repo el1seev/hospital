@@ -1,0 +1,185 @@
+.nav
+{
+  display: flex;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background: #545454;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.logo
+{
+  position: absolute;
+  left: 0;
+  margin: 0px 20px 0px 20px;
+}
+
+.nav-list
+{
+  flex-direction: row;
+  list-style-type: none;
+  display: flex;
+}
+
+a
+{
+  text-decoration: none;
+}
+
+.list-child
+{
+  margin-left: 20px;
+}
+
+.nav-link
+{
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+  color: #FFFFFF;
+  -webkit-text-stroke: 0.5px #9c9c9c; /* For Safari */
+  text-transform: uppercase;
+  font-size: calc(18px + 2 * (100vw/ 1440));
+}
+
+.tel-list
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+}
+
+.nav-tel-text
+{
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+  color: #7DC07F;
+  text-transform: uppercase;
+  -webkit-text-stroke: 0.5px #ffffff;
+  font-size: calc(18px + 2 * (100vw/ 1440));
+}
+
+.tel
+{
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+  color: #FFFFFF;
+  margin-left: 20px;
+  text-transform: uppercase;
+  -webkit-text-stroke: 0.5px #9c9c9c;
+  font-size: calc(18px + 2 * (100vw/ 1440));
+}
+
+.profile-wrap
+{
+  display: flex;
+  flex-direction: row;
+  margin-right: 5px;
+  margin-left: 20px;
+
+}
+
+.entire-profile
+{
+  font-style: normal;
+  font-weight: 700;
+  font-size: calc(18px + 2 * (100vw/ 1440));
+  line-height: 21px;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  -webkit-text-stroke: 0.5px #9c9c9c;
+}
+
+.header-burger
+{
+  display: none;
+  position: absolute;
+  right: 30px;
+  width: 30px;
+  height: 20px;
+}
+
+.header-burger:before,
+.header-burger:after
+{
+  content: '';
+  background-color: #FFFFFF;
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  transition: all 0.3s ease 0s;
+}
+.header-burger:before
+{
+  top: 0;
+}
+.header-burger span
+{
+  position: absolute;
+  background-color: #FFFFFF;
+  width: 100%;
+  height: 3px;
+  top: 9px;
+  transition: all 0.3s ease 0s;
+}
+.header-burger:after
+{
+  bottom: 0;
+}
+
+.header-burger.active:before
+{
+  transform: rotate(45deg);
+  top: 9px
+}
+
+.header-burger.active:after
+{
+  transform: rotate(-45deg);
+  bottom: 8px;
+}
+
+.header-burger.active span
+{
+  transform: scale(0);
+}
+
+@media screen and (max-width: 1300px){
+  .nav-list, .nav-tel
+  {
+    display: none;
+  }
+
+  .profile-wrap
+  {
+    position: absolute;
+    right: 100px;
+  }
+
+  .header-burger
+  {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 1000px){
+
+
+}
+
+@media screen and (max-width: 768px){
+
+}
+
+@media screen and (max-width: 480px){
+
+}

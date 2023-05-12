@@ -1,0 +1,104 @@
+.home
+{
+  position: relative;
+  min-height: 100%;
+  width: 100%;
+  background-image: url(../../assets/images/hall-blur.jpg);
+  background-size: cover;
+  background-position: 50%;
+}
+
+.main-nav
+{
+  text-align: left;
+  margin: 150px 0px 0px 0px;
+}
+
+.main-nav li
+{
+  width: fit-content;
+}
+
+.main-nav-li
+{
+  display: block;
+  width: fit-content;
+  font-style: normal;
+  font-weight: 700;
+  font-size: calc(55px + 17 * (100vw/ 1440));
+  color: #FFFFFF;
+  -webkit-text-stroke: 1.5px #A8A8A8;
+  text-shadow: 0px 6px 6px rgba(0, 0, 0, 0.25);
+  margin-top: 5px;
+}
+
+.schedule
+{
+  font-style: normal;
+  font-weight: 700;
+  font-size: calc(35px + 5 * (100vw/ 1440));
+  line-height: 56px;
+  color: #FFFFFF;
+  -webkit-text-stroke: 1.5px #A8A8A8;
+  text-shadow: 0px 6px 6px rgba(0, 0, 0, 0.25);
+  margin: 0;
+}
+
+.address-wrap
+{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  margin: 30px 0px 10px 0px;
+}
+
+.address
+{
+  font-style: normal;
+  font-weight: 700;
+  font-size: calc(35px + 5 * (100vw / 1440));
+  line-height: 56px;
+  color: #FFFFFF;
+  -webkit-text-stroke: 1.5px #A8A8A8;
+  text-shadow: 0px 6px 6px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 767px) {
+  .schedule
+  {
+    font-size: calc(35px + (5 + 5 * 0.7) * ((100vw - 320px) / 1440));
+    -webkit-text-stroke: 1px #A8A8A8;
+  }
+
+  .address
+  {
+    font-size: calc(35px + (5 + 5 * 0.7) * ((100vw - 320px) / 1440));
+    -webkit-text-stroke: 1px #A8A8A8;
+  }
+
+  .main-nav-li
+  {
+    font-size: calc(47px + (17 + 5 * 0.7) * ((100vw - 320px) / 1440));
+    -webkit-text-stroke: 1px #A8A8A8;
+  }
+
+  .mark
+  {
+    height: 85px;
+    width: 37px;
+  }
+}
+
+@media screen and (max-width: 480px){
+  .main-nav li 
+  {
+    margin-bottom: 20px;
+  }
+
+  .main-nav-li
+  {
+    line-height: 50px;
+  }
+}
