@@ -22,11 +22,11 @@ app.use(bodyParser.json());
 //позволяет делать http-запросы на наш сервер
 app.use(
     cors({
-        origin: ['http//localhost:3000'],
-        methods: 'GET,POST,PUT,HEAD,DELETE',
+        origin: ['http://localhost:3000'],
+        methods: '*',
         credentials: true,
     })
-)
+);
     
 //инициализация маршрутов
 app.use(routes);

@@ -37,7 +37,9 @@ const createDoctor = async (req, res) => {
 // Получение списка всех врачей
 const getAllDoctors = async (req, res) => {
   try {
-    const doctors = await Doctor.find();
+    const doctors = await Doctor.find()
+    .populate('specialization', 'name')
+    .populate('category', 'name');
     res.status(200).json(doctors);
   } catch (err) {
     res.status(500).json({ message: err.message });

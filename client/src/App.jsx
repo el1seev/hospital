@@ -14,10 +14,10 @@ const App = () => {
     console.log(modalActive);
     if(modalActive){
       setModalActive(false)
-      document.body.style.overflow_x = 'auto';
+      document.body.style.overflowY = 'auto';
     } else {
       setModalActive(true)
-      document.body.style.overflow_x = 'hidden';
+      document.body.style.overflowY = 'hidden';
     }
   }
 
@@ -37,7 +37,7 @@ const App = () => {
     console.log(windowWidth);
     if(windowWidth >= 1301){
       setModalActive(false)
-      document.body.style.overflow_x = 'auto';
+      document.body.style.overflowY = 'auto';
     }
   }, [windowWidth]);
 

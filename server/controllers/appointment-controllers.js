@@ -1,9 +1,10 @@
 const Appointment = require('../models/appointment');
+const Patient = require('../models/patient');
 
 // Контроллер для получения талонов конкретного врача
 const getAppointmentsByDoctor = async (req, res) => {
   try {
-    const doctorId = req.params.id;
+    const doctorId = req.body._id;
 
     // Находим все талоны для данного врача
     const appointments = await Appointment.find({ doctorId });
@@ -24,7 +25,7 @@ const getAppointmentsByDoctor = async (req, res) => {
 
 // Получить талоны конкретного пациента
 const getAppointmentsByPatient = async (req, res, next) => {
-  const patientId = req.params.id;
+  const patientId = req.params._id;
   try {
     const appointments = await Appointment.find({ patientId: patientId, status: 'занят'});
 
@@ -61,7 +62,7 @@ const cancelAppointment = async (req, res) => {
 //Занять талон
 const bookAppointment = async (req, res) => {
   try {
-    const { patientId, appointmentId } = req.body;
+    const { passportId, appointmentId } = req.body;
 
     const appointment = await Appointment.findById(appointmentId);
 
@@ -73,7 +74,8 @@ const bookAppointment = async (req, res) => {
       return res.status(400).json({ message: 'Талон уже занят' });
     }
 
-    appointment.patientId = patientId;
+    const patient = await Patient.findOne({passportId: passportId})
+    appointment.patientId = patient._id;
     appointment.status = 'занят';
     const updatedAppointment = await appointment.save();
 
