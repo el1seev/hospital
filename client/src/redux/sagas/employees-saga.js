@@ -3,13 +3,16 @@ import { GET_EMPLOYEES, SET_EMPLOYEES } from "../action-types/action-types";
 import { fetchEmployees } from "../../api/fetchData";
 
 function* getEmployees() {
-  console.log('z')
-    const response = yield call(fetchEmployees);
-    yield put({ type: SET_EMPLOYEES, payload: response });
+  const response = yield call(fetchEmployees);
+  yield put({ type: SET_EMPLOYEES, payload: response });
+}
+
+function* forkEmployees(){
+  yield fork(getEmployees);
 }
 
 function* employeesSaga() {
-  yield takeEvery(GET_EMPLOYEES, getEmployees);
+  yield takeEvery(GET_EMPLOYEES, forkEmployees);
 }
 
 export default employeesSaga;

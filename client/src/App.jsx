@@ -6,6 +6,9 @@ import Footer from "./components/footer/footer";
 import Home from "./pages/home/home";
 import './App.css';
 import Employees from "./pages/employees/employees";
+import Services from "./pages/services/services";
+import ServiceInfo from "./pages/service-info/service-info";
+import Appointments from "./pages/appointments.js/appointments";
 
 const App = () => {
   const [modalActive, setModalActive] = useState(false);
@@ -51,7 +54,7 @@ const App = () => {
         <ul>
           <li className='list-child'><Link to='/home' className='nav-link' onClick={setActive}>Главная</Link></li>
           <li className='list-child'><Link to='/book-appointment' className='nav-link' onClick={setActive}>Запись на приём</Link></li>
-          <li className='list-child'><Link to='/service' className='nav-link' onClick={setActive}>Услуги</Link></li>
+          <li className='list-child'><Link to='/services' className='nav-link' onClick={setActive}>Услуги</Link></li>
           <li className='list-child'><Link to='/employees' className='nav-link' onClick={setActive}>Сотрудники</Link></li>
           <li className='list-child'><Link to='/about-us' className='nav-link' onClick={setActive}>О нас</Link></li>
         </ul>
@@ -62,6 +65,9 @@ const App = () => {
             <Route path='/' element={<Home/>}/>
             <Route path='/home' element={<Home/>}/>
             <Route path='/employees' element={<Employees/>}/>
+            <Route path='/employees/:id/appointments' element={<Appointments/>}/>
+            <Route path='/services' element={<Services/>}/>
+            <Route path='/services/:id' element={<ServiceInfo/>}/>
           </Routes>
       </main>
 

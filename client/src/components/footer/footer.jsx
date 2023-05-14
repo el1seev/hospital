@@ -34,7 +34,7 @@ const Footer = () => {
             </ul>
             <ul className='info'>
               КОНСУЛЬТАЦИЯ:
-              <li><Link to='/service'>услуги</Link></li>
+              <li><Link to='/services'>услуги</Link></li>
               <li><Link to='/book-appointment'>запись на приём</Link></li>
             </ul>
           </div>

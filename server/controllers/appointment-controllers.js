@@ -4,11 +4,21 @@ const Patient = require('../models/patient');
 // Контроллер для получения талонов конкретного врача
 const getAppointmentsByDoctor = async (req, res) => {
   try {
-    const doctorId = req.body._id;
-
+    const doctorId = req.params.id;
     // Находим все талоны для данного врача
-    const appointments = await Appointment.find({ doctorId });
-
+    const appointments = await Appointment
+                                          .find({ doctorId: doctorId })
+                                          .populate({
+                                            path: 'doctorId',
+                                            select: 'firstName secondName middleName',
+                                            populate: {
+                                              path: 'specialization',
+                                              select: 'name'
+                                            },
+                                            options: {
+                                              strictPopulate: false // добавленная опция
+                                            }
+                                          });
     // Фильтруем занятые талоны
     const availableAppointments = appointments.filter(
       (appointment) => appointment.status === 'свободен'
@@ -24,10 +34,22 @@ const getAppointmentsByDoctor = async (req, res) => {
 };
 
 // Получить талоны конкретного пациента
-const getAppointmentsByPatient = async (req, res, next) => {
+const getAppointmentsByPatient = async (req, res) => {
   const patientId = req.params._id;
   try {
-    const appointments = await Appointment.find({ patientId: patientId, status: 'занят'});
+    const appointments = await Appointment
+                                          .find({ doctorId: doctorId })
+                                          .populate({
+                                            path: 'doctorId',
+                                            select: 'firstName secondName middleName',
+                                            populate: {
+                                              path: 'specialization',
+                                              select: 'name'
+                                            },
+                                            options: {
+                                              strictPopulate: false // добавленная опция
+                                            }
+                                          });
 
     res.status(200).json({
       success: true,
@@ -74,7 +96,26 @@ const bookAppointment = async (req, res) => {
       return res.status(400).json({ message: 'Талон уже занят' });
     }
 
-    const patient = await Patient.findOne({passportId: passportId})
+    const patient = await Patient.findOne({passportId: passportId});
+    const patientAppointments = await Appointment
+                                                .find({ patientId: patient._id })
+                                                .populate({
+                                                  path: 'doctorId',
+                                                  select: 'firstName secondName middleName',
+                                                  populate: {
+                                                    path: 'specialization',
+                                                    select: 'name'
+                                                  },
+                                                  options: {
+                                                    strictPopulate: false // добавленная опция
+                                                  }
+                                                });
+    const doctorAppointments = patientAppointments.filter(appointment => appointment.doctorId === appointment.doctorId);
+
+    if (doctorAppointments.length > 0) {
+      return res.status(400).json({ message: 'Пациент уже занял талон у данного врача' });
+    }
+
     appointment.patientId = patient._id;
     appointment.status = 'занят';
     const updatedAppointment = await appointment.save();

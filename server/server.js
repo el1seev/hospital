@@ -22,17 +22,15 @@ app.use(bodyParser.json());
 //позволяет делать http-запросы на наш сервер
 app.use(
     cors({
-        origin: ['http://localhost:3000'],
+        origin: 'http://localhost:3000',
         methods: '*',
         credentials: true,
+        allowedHeaders: ['Content-Type', 'Authorization']
     })
 );
     
 //инициализация маршрутов
 app.use(routes);
-
-//проверка истёкших талонов и их удаление
-app.use(checkExpiredAppointments);
 
 //обработка ошибок
 app.use(function (error, req, res, next) {

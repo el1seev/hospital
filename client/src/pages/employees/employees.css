@@ -67,6 +67,30 @@
   font-size: calc(16px + 2 * (100vw/ 1440))
 }
 
+.book-button
+{
+  display: inline-block;
+  margin: 15px 10px 10px 10px;
+  padding: 10px 20px;
+  color: #fff;
+  -webkit-text-stroke: 0.5px #9c9c9c;
+  border: none;
+  text-decoration: none;
+  font-size: calc(16px + 2 * (100vw/ 1440));
+  font-weight: bold;
+  border-radius: 10px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+  text-transform: uppercase;
+  background: rgba(0, 0, 0, 0.5);
+  transition: 0.2s;
+}
+
+.book-button:hover
+{
+  color: #fff;
+  background: rgba(50, 50, 50, 0.4);
+}
+
 @media (max-width: 1200px) {
   .emlpoyees-wrap
   {
@@ -80,11 +104,6 @@
   {
     grid-template-columns: repeat(2,minmax(150px,256px));
     grid-column-gap: 20px;
-  }
-
-  .reception-tel
-  {
-    font-size: calc(30px + (5 + 5 * 0.7) * ((100vw - 320px) / 1440));
   }
 }
 

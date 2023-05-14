@@ -15,7 +15,7 @@ const Nav = (props) => {
         <ul className='nav-list'>
           <li className='list-child'><Link to='/home' className='nav-link'>Главная</Link></li>
           <li className='list-child'><Link to='/book-appointment' className='nav-link'>Запись на приём</Link></li>
-          <li className='list-child'><Link to='/service' className='nav-link'>Услуги</Link></li>
+          <li className='list-child'><Link to='/services' className='nav-link'>Услуги</Link></li>
           <li className='list-child'><Link to='/employees' className='nav-link'>Сотрудники</Link></li>
           <li className='list-child'><Link to='/about-us' className='nav-link'>О нас</Link></li>
         </ul>
@@ -30,9 +30,9 @@ const Nav = (props) => {
         </div>
 
 
-      <div className={!props.modalActive ? 'header-burger' : 'header-burger active'} onClick={props.setActive} >
+      <button className={!props.modalActive ? 'header-burger' : 'header-burger active'} onClick={props.setActive} >
         <span></span>
-      </div>
+      </button>
 
 
     </div>

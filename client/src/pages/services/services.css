@@ -1,0 +1,107 @@
+.services-page
+{
+  display: block;
+  position: relative;
+  min-height: 100%;
+  width: 100%;
+  background-image: url(../../assets/images/blur-hospital.jpg);
+  background-size: cover;
+  background-position: 50%;
+}
+
+.services-wrap
+{
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(3,minmax(350px,320px));
+  grid-gap: 75px 75px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 50px 30px 50px 30px;
+}
+
+.service-wrap
+{
+  display: block;
+  height: 230px;
+}
+
+.service-container
+{
+  display: flex;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-position: 50%;
+  border: 1px solid #000000;
+  border-radius: 25px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.service-name-wrap
+{
+  width: 100%;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 10px 0px 10px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.service-name
+{
+  margin: 3px;
+  text-align: center;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 19px;
+  color: #ffffff;
+  -webkit-text-stroke: 0.5px #9c9c9c;
+  font-weight: 700;
+  font-size: calc(20px + 5 * (100vw/ 1440))
+}
+
+.loading
+{
+  padding: 50px;
+  text-align: center;
+  font-style: normal;
+  line-height: 19px;
+  color: #000000;
+  font-weight: 700;
+  font-size: calc(18px + 3 * (100vw/ 1440))
+}
+
+
+@media (max-width: 1440px) {
+  .services-wrap
+  {
+    grid-template-columns: repeat(2,minmax(350px,320px));
+    grid-column-gap: 20px;
+  }
+}
+
+@media screen and (max-width: 1020px){
+  .services-wrap
+  {
+    grid-template-columns: repeat(1,minmax(250px,320px));
+    grid-column-gap: 20px;
+  }
+}
+
+
+@media (max-width: 690px){
+  .services-wrap
+  {
+    grid-template-columns: repeat(1,minmax(250px,320px));
+  }
+  
+  .services-name
+  {
+    font-size: calc(20px + (5 + 5 * 0.7) * ((100vw - 320px) / 1440));
+  }
+}

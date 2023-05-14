@@ -106,6 +106,9 @@ a
   right: 30px;
   width: 30px;
   height: 20px;
+  border: none;
+  background: none;
+  padding-right: 25px;
 }
 
 .header-burger:before,
