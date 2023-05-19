@@ -1,15 +1,15 @@
-.appointments-page
+.profile-page
 {
   display: block;
   position: relative;
   min-height: 100%;
   width: 100%;
-  background-image: url(../../assets/images/reception-blur.jpg);
+  background-image: url(../../assets/images/hall-blur.jpg);
   background-size: cover;
   background-position: 50%;
 }
 
-.appointments-wrap
+.appoinments-wrap
 {
   display: grid;
   justify-content: center;
@@ -19,90 +19,35 @@
   margin: 50px 30px 50px 30px;
 }
 
-.loading
+.user-info
 {
-  padding: 50px;
-  text-align: center;
   font-style: normal;
-  line-height: 19px;
-  color: #000000;
   font-weight: 700;
-  font-size: calc(18px + 3 * (100vw/ 1440))
+  font-size: calc(35px + 5 * (100vw/ 1440));
+  line-height: 56px;
+  color: #FFFFFF;
+  -webkit-text-stroke: 1.5px #A8A8A8;
+  text-shadow: 0px 6px 6px rgba(0, 0, 0, 0.25);
+  margin: 0;
 }
 
-.book-form
+.no-appointments-wrap
 {
-  position: relative;
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  margin: 50px 30px 50px 30px;
 }
 
-.cancel-button
+.no-appointments
 {
-  position: absolute;
-  right: 10px;
-  top: 0;
-  height: 50px;
-  width: 50px;
-  transition: 0.2s;
-  background: none;
-  border: none;
-}
-
-.cancel-svg
-{
-  transition: 0.2s;
-}
-
-.cancel-svg:hover
-{
-  fill:#9c9c9c;
-}
-
-.form
-{
-  margin-top: 40px;
-  margin-bottom: 40px;
-  height: fit-content;
-  width: 300px;
-  padding: 40px;
-  text-align: center;
-  border: 3px solid aliceblue;
-  border-radius: 30px;
-}
-
-label
-{
-  color: #fff;
-  border: none;
-  text-decoration: none;
-  font-size: calc(16px + 2 * (100vw/ 1440));
-  font-weight: bold;
-}
-
-input
-{
-  border:0;
-  background: none;
-  display: block;
-  margin: 20px auto;
-  font-size: 15px;
-  text-align: center;
-  border: 2px solid aliceblue;
-  padding: 14px 10px;
-  width: 200px;
-  outline: none;    color: aliceblue;
-  border-radius: 24px;
-  transition: 0.25s;
-}
-
-input:focus
-{
-  width: 250px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: calc(35px + 5 * (100vw/ 1440));
+  line-height: 56px;
+  color: #E66565;
+  -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.55);
+  text-shadow: 0px 6px 6px rgba(0, 0, 0, 0.25);
+  margin: 0;
 }
 
 
@@ -132,6 +77,12 @@ input:focus
   {
     grid-template-columns: repeat(3,minmax(175px,175px));
     grid-column-gap: 30px;
+  }
+
+  .user-info
+  {
+    font-size: calc(35px + (5 + 5 * 0.7) * ((100vw - 320px) / 1440));
+    -webkit-text-stroke: 1px #A8A8A8;
   }
   
   .appointment-info

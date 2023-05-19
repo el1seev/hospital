@@ -1,0 +1,63 @@
+.auth-page
+{
+  display: block;
+  position: relative;
+  min-height: 100%;
+  width: 100%;
+  background-image: url(../../assets/images/reception-blur.jpg);
+  background-size: cover;
+  background-position: 50%;
+}
+
+.auth-form-wrap
+{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.form
+{
+  margin-top: 40px;
+  margin-bottom: 40px;
+  height: fit-content;
+  width: 300px;
+  padding: 40px;
+  text-align: center;
+  border: 3px solid aliceblue;
+  border-radius: 30px;
+}
+
+label
+{
+  color: #fff;
+  border: none;
+  text-decoration: none;
+  font-size: calc(16px + 2 * (100vw/ 1440));
+  font-weight: bold;
+}
+
+input
+{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  font-size: 15px;
+  text-align: center;
+  border: 2px solid aliceblue;
+  padding: 14px 10px;
+  width: 200px;
+  outline: none;    color: aliceblue;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+
+input:focus
+{
+  width: 250px;
+}

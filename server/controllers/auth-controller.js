@@ -11,8 +11,8 @@ const login = async (req, res) => {
   try {
     console.log(req.body)
     // Находим пользователя в базе данных по логину
-    const user = await User.findOne({ passportId: req.body.passportId });
-
+    const user = await User.findOne({ passportId: req.body.passportId })
+                                                                        .populate('patientId', 'firstName secondName');
     // Если пользователь не найден, возвращаем ошибку
     const comparePassword = bcrypt.compare(req.body.password, user.password);
     if (!user || !comparePassword) {
@@ -20,10 +20,10 @@ const login = async (req, res) => {
     }
 
     // Создаем JWT-токен
-    const token = jwt.sign({ userId: user._id, secondName: user.secondName }, JWT_SECRET, {expiresIn: '10min'});
+    const token = jwt.sign({ userId: user._id, firstName: user.patientId.firstName, secondName: user.patientId.secondName, userType: user.userType }, JWT_SECRET, {expiresIn: '30min'});
 
     // Отправляем токен клиенту
-    res.status(200).json({ message: 'Аутентификация прошла успешно', firstName: user.firstName, secondName: user.secondName, token: token });
+    res.status(200).json({ message: 'Аутентификация прошла успешно', token: token });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

@@ -12,7 +12,7 @@ const Employees = () => {
   const dispatch = useDispatch();
 
   const handleEmployees = async () => {
-    await dispatch(getEmployees());
+    dispatch(getEmployees());
   }
   useEffect(() => {
     handleEmployees();

@@ -1,17 +1,24 @@
-import { Routes, Route, Link } from "react-router-dom";
-
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import jwt_decode from 'jwt-decode';
+
 import Nav from './components/nav/nav';
 import Footer from "./components/footer/footer";
 import Home from "./pages/home/home";
-import './App.css';
 import Employees from "./pages/employees/employees";
 import Services from "./pages/services/services";
 import ServiceInfo from "./pages/service-info/service-info";
 import Appointments from "./pages/appointments.js/appointments";
+import Auth from "./pages/auth/auth";
+import Profile from "./pages/profile/profile";
+import './App.css';
+import Admin from "./pages/admin/admin";
+import BookAppointment from "./pages/book-appointment/book-appointment";
 
 const App = () => {
   const [modalActive, setModalActive] = useState(false);
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   const setActive = () => {
     console.log(modalActive);
@@ -27,17 +34,29 @@ const App = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = jwt_decode(token);
+      const currentTime = Date.now() / 1000;
+      if (decodedToken.exp < currentTime) {
+        localStorage.removeItem('token');
+        navigate('/', { replace: true });
+        window.location.reload();
+      } else {
+        setUser({userType:  decodedToken.userType, firstName: decodedToken.firstName ,secondName: decodedToken.secondName, id: decodedToken.userId});
+      }
+    }
+  }, []);
+
+  useEffect(() => {
     function handleResize() {
       setWindowWidth(window.innerWidth);
     }
-
     window.addEventListener('resize', handleResize);
-
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   useEffect(() => {
-    console.log(windowWidth);
     if(windowWidth >= 1301){
       setModalActive(false)
       document.body.style.overflowY = 'auto';
@@ -47,7 +66,7 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <Nav setActive={setActive} modalActive={modalActive}/>
+        <Nav setActive={setActive} modalActive={modalActive} user={user}/>
       </header>
 
       <div className={ !modalActive ? 'modal-nav' : 'modal-nav aсtive'}>
@@ -68,6 +87,14 @@ const App = () => {
             <Route path='/employees/:id/appointments' element={<Appointments/>}/>
             <Route path='/services' element={<Services/>}/>
             <Route path='/services/:id' element={<ServiceInfo/>}/>
+            <Route path='/auth' element={<Auth/>}/>
+            <Route path='/book-appointment' element={<BookAppointment/>}/>
+            {
+              user !== null && (<Route path={`/profile/${user.id}`} element={<Profile/>}/>)
+            }
+            {
+              user && user.userType === 'админ' && ( <Route path='/admin' element={<Admin/>}/> )
+            }
           </Routes>
       </main>
 

@@ -5,9 +5,9 @@ const { isPatient } = require('../middleware/checkRole');
 const { authenticate } = require('../middleware/passport-auth');
 
 // Маршрут для аутентификации пользователя
-router.post('/login', login);
+router.post('/api/login', login);
 
 // Маршрут для получения информации о текущем пользователе
-router.get('/me', authenticate, isPatient, currentUser);
+router.get('/appointments/me', authenticate, isPatient, currentUser);
 
 module.exports = router;

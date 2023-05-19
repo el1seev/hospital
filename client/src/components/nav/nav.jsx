@@ -26,7 +26,15 @@ const Nav = (props) => {
         </ul>
 
         <div className='profile-wrap'>
-          <Link className='entire-profile'>Вход</Link>
+          {
+            !props.user ?
+            <Link className='entire-profile' to='/auth'>Вход</Link>
+            :
+              props.user.userType !== 'админ' ?
+              <Link className='entire-profile' to={`/profile/${props.user.id}`}>{props.user.secondName}</Link>
+              :
+              <Link className='entire-profile' to={`/admin`}>{props.user.userType}</Link>
+          }
         </div>
 
 

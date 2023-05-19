@@ -1,5 +1,5 @@
 const Appointment = require('../models/appointment');
-const Patient = require('../models/patient');
+const User = require('../models/user');
 
 // Контроллер для получения талонов конкретного врача
 const getAppointmentsByDoctor = async (req, res) => {
@@ -16,7 +16,7 @@ const getAppointmentsByDoctor = async (req, res) => {
                                               select: 'name'
                                             },
                                             options: {
-                                              strictPopulate: false // добавленная опция
+                                              strictPopulate: false 
                                             }
                                           });
     // Фильтруем занятые талоны
@@ -35,10 +35,13 @@ const getAppointmentsByDoctor = async (req, res) => {
 
 // Получить талоны конкретного пациента
 const getAppointmentsByPatient = async (req, res) => {
-  const patientId = req.params._id;
   try {
+    const userId = req.params.id;
+    const user = await User.findById(userId);
+
+    console.log(user.patientId);
     const appointments = await Appointment
-                                          .find({ doctorId: doctorId })
+                                          .find({ patientId: user.patientId })
                                           .populate({
                                             path: 'doctorId',
                                             select: 'firstName secondName middleName',
@@ -47,10 +50,11 @@ const getAppointmentsByPatient = async (req, res) => {
                                               select: 'name'
                                             },
                                             options: {
-                                              strictPopulate: false // добавленная опция
+                                              strictPopulate: false 
                                             }
                                           });
 
+    console.log(appointments);
     res.status(200).json({
       success: true,
       patientAppointments: appointments,
@@ -64,9 +68,13 @@ const getAppointmentsByPatient = async (req, res) => {
 const cancelAppointment = async (req, res) => {
   try {
     const { appointmentId } = req.body;
-    const patientId = req.params.id;
+    const userId = req.params.id;
+    const user = await User.findById(userId);
+    const patientId = user.patientId;
+
     const updatedAppointment = await Appointment.findOneAndUpdate(
       { _id: appointmentId, patientId: patientId, status: "занят" },
+      { $unset: { patientId: 1 } },
       { status: "свободен" },
       { new: true }
     );
@@ -84,8 +92,8 @@ const cancelAppointment = async (req, res) => {
 //Занять талон
 const bookAppointment = async (req, res) => {
   try {
+    console.log(req.body)
     const { passportId, appointmentId } = req.body;
-
     const appointment = await Appointment.findById(appointmentId);
 
     if (!appointment) {
@@ -107,7 +115,7 @@ const bookAppointment = async (req, res) => {
                                                     select: 'name'
                                                   },
                                                   options: {
-                                                    strictPopulate: false // добавленная опция
+                                                    strictPopulate: false
                                                   }
                                                 });
     const doctorAppointments = patientAppointments.filter(appointment => appointment.doctorId === appointment.doctorId);
