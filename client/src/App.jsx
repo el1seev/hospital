@@ -8,12 +8,14 @@ import Home from "./pages/home/home";
 import Employees from "./pages/employees/employees";
 import Services from "./pages/services/services";
 import ServiceInfo from "./pages/service-info/service-info";
-import Appointments from "./pages/appointments.js/appointments";
+import Appointments from "./pages/appointments/appointments";
 import Auth from "./pages/auth/auth";
 import Profile from "./pages/profile/profile";
 import './App.css';
-import Admin from "./pages/admin/admin";
+import Admin from "./pages/admin-profile/admin-profile";
 import BookAppointment from "./pages/book-appointment/book-appointment";
+import AdminAdd from "./pages/admin-add/admin-add";
+import AdminDelete from "./pages/admin-delete/admin-delete";
 
 const App = () => {
   const [modalActive, setModalActive] = useState(false);
@@ -93,7 +95,14 @@ const App = () => {
               user !== null && (<Route path={`/profile/${user.id}`} element={<Profile/>}/>)
             }
             {
-              user && user.userType === 'админ' && ( <Route path='/admin' element={<Admin/>}/> )
+              user && user.userType === 'админ' && 
+              (
+              <>
+                <Route path='/admin' element={<Admin/>}/> 
+                <Route path='admin/add' element={<AdminAdd/>}/>
+                <Route path='admin/delete' element={<AdminDelete/>}/>
+              </> 
+              )
             }
           </Routes>
       </main>

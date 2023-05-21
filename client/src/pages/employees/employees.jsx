@@ -18,7 +18,7 @@ const Employees = () => {
     handleEmployees();
   }, []);
 
-  return(
+  return (
     <div className='employees-page'>
       <ReceptionTel/>
       <div className='emlpoyees-wrap'>

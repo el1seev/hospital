@@ -8,7 +8,7 @@ const createCategory = async (req, res) => {
     await category.save();
     res.status(201).json(category);
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 };
 
@@ -18,7 +18,7 @@ const getAllCategories = async (req, res) => {
     const categories = await Category.find();
     res.status(200).json(categories);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 };
 
@@ -31,7 +31,7 @@ const getCategoryById = async (req, res) => {
     }
     res.status(200).json(category);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 };
 
@@ -44,7 +44,7 @@ const updateCategory = async (req, res) => {
     }
     res.status(200).json(category);
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 };
 
@@ -58,7 +58,7 @@ const deleteCategory = async (req, res) => {
     await Category.deleteOne({ categoryId: req.params.id });
     res.status(204).json(`Категория успешно удалена: ${category}`);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 };
 

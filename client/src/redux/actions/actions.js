@@ -1,6 +1,6 @@
 import 
-{ BOOK_APPOINTMENT, GET_APPOINTMENTS, GET_EMPLOYEES,
-GET_SERVICES, GET_SPECIALIZATIONS, SET_APPOINTMENTS, SET_EMPLOYEES, SET_SERVICES, SET_SPECIALIZATIONS
+{ BOOK_APPOINTMENT, GET_EMPLOYEES,
+GET_SERVICES, GET_SPECIALIZATIONS, SET_EMPLOYEES, SET_SERVICES, SET_SPECIALIZATIONS
 } from "../action-types/action-types";
 
 //get and set list of employees
@@ -28,20 +28,6 @@ export const setServices = (services) => {
   return {
     type: SET_SERVICES,
     payload: services,
-  };
-};
-
-//get and set appoinments
-export const getAppointments = () => {
-  return {
-    type: GET_APPOINTMENTS,
-  };
-};
-
-export const setAppointments = (appointments) => {
-  return {
-    type: SET_APPOINTMENTS,
-    payload: appointments,
   };
 };
 //book appointment

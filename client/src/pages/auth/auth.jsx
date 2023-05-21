@@ -26,7 +26,7 @@ const Auth = () => {
 
   return (
     <div className='auth-page'>
-      <div className='auth-form-wrap'>
+      <div className='form-wrap'>
         <form className='form'>
           <label>Введите серию паспорта
             <input onChange={changeHandler} type="text" id="passport" name="passport" placeholder="AB0000000"></input>

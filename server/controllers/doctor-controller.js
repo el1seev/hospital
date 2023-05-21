@@ -11,17 +11,8 @@ const
 // Создание нового врача
 const createDoctor = async (req, res) => {
   try {
-    console.log(req.body);
-    const { passportId } = req.body;
-    // Проверяем, есть ли пользователь с таким passportId в базе данных
-    const existingUser = await User.findOne({ passportId });
-    if (existingUser) {
-      return res.status(409).json({ message: 'Пользователь с такими данными уже существует' });
-    }
-
     const doctor = await Doctor.create(req.body);
     const user = new User({
-      passportId: req.body.passportId,
       password: req.body.password,
       userType: 'врач',
       doctorId: doctor._id
@@ -30,7 +21,7 @@ const createDoctor = async (req, res) => {
     await createAppointmentsForDoctor(appointmentsCollection, startDate, endDate, interval, doctor._id);
     res.status(201).json(doctor);
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 };
 
@@ -42,7 +33,7 @@ const getAllDoctors = async (req, res) => {
     .populate('category', 'name');
     res.status(200).json(doctors);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 };
 
@@ -55,7 +46,7 @@ const getDoctorById = async (req, res) => {
     }
     res.status(200).json(doctor);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 };
 
@@ -69,7 +60,7 @@ const updateDoctor = async (req, res) => {
     await updateAppointmentsForDoctor(appointmentsCollection, doctor._id, startDate, endDate, interval);
     res.status(200).json(doctor);
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 };
 
@@ -84,7 +75,7 @@ const deleteDoctor = async (req, res) => {
     await deleteAppointmentsForDoctor(appointmentsCollection, doctor._id);
     res.status(204).json(`Врач был успешно удалён: ${doctor}`);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 };
 

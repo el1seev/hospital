@@ -17,18 +17,19 @@ const BookAppointment = () => {
     dispatch(getSpecializations());
   }
 
-  const filterBySpecialization = async (specialization) => {
-    if(!specialization){
-      dispatch(getEmployees());
-    }
-    const employeesBySpecialization = employees.filter(( employee ) => {
-      return employee.specialization === specialization;
+  const filterBySpecialization = async (specializationId) => {
+    console.log(employees)
+    const employeesBySpecialization = await employees.filter(( employee ) => {
+      return employee.specialization._id === specializationId;
     })
     setEmployees(employeesBySpecialization);
   }
 
   useEffect(() => {
-    handleSpecializations()
+    handleSpecializations();
+    if(!employees){
+      dispatch(getEmployees());
+    }
   }, [])
   
   return (
@@ -37,7 +38,7 @@ const BookAppointment = () => {
       {
         filteredEmployees !== null ?
         <div className='emlpoyees-wrap'>
-        { employees.map( employee => (
+        { filteredEmployees.map( employee => (
           <div className='doctor-wrap' key={employee._id}>
             <div className='doctor-container'>
               <div className='doctor-logo'> 

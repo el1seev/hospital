@@ -8,7 +8,7 @@ const createSpecialization = async (req, res) => {
     await specialization.save();
     res.status(201).json(specialization);
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 };
 
@@ -18,7 +18,7 @@ const getAllSpecializations = async (req, res) => {
     const categories = await Specialization.find();
     res.status(200).json(categories);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 };
 
@@ -31,7 +31,7 @@ const getSpecializationById = async (req, res) => {
     }
     res.status(200).json(specialization);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 };
 
@@ -44,7 +44,7 @@ const updateSpecialization = async (req, res) => {
     }
     res.status(200).json(specialization);
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 };
 
@@ -58,7 +58,7 @@ const deleteSpecialization = async (req, res) => {
     await Specialization.deleteOne({ specializationId: req.params.id });
     res.status(204).json(`Специализациия успешно удалена: ${specialization}`);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 };
 

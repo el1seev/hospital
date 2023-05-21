@@ -1,10 +1,20 @@
 const mongoose = require('mongoose');
 const validateName = require('../helpers/validateName');
 const validateBirth = require('../helpers/validateBirth');
+const validatePassport  = require('../helpers/validatePassport');
 
 const Schema = mongoose.Schema;
 
 const DoctorSchema = new Schema({
+  passportId: {
+    type: String,
+    required: [true, 'Введите номер паспорта'],
+    validate: {
+      validator: validatePassport,
+      message: "Некорректный номер паспорта"
+    },
+    unique: true
+  },
   firstName: {
     type: String,
     required: [true, 'Введите имя'],
@@ -15,7 +25,6 @@ const DoctorSchema = new Schema({
   },
   secondName: {
     type: String,
-    required: [true, 'Введите фамилию'],
     validate: {
       validator: validateName,
       message: 'Некорректные данные'

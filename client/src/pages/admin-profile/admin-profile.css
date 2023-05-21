@@ -1,0 +1,15 @@
+.admin-page
+{
+  display: block;
+  position: relative;
+  min-height: 100%;
+  width: 100%;
+  background-image: url(../../assets/images/hall-blur.jpg);
+  background-size: cover;
+  background-position: 50%;
+}
+
+.admin-page .main-nav
+{
+  margin-bottom: 150px;
+}

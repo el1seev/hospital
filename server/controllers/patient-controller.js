@@ -7,14 +7,13 @@ const createPatient = async (req, res) => {
     console.log(req.body)
     const { passportId } = req.body;
     // Проверяем, есть ли пользователь с таким passportId в базе данных
-    const existingUser = await User.findOne({ passportId });
+    const existingUser = await Patient.findOne({ passportId });
     if (existingUser) {
       return res.status(409).json({ message: 'Пользователь с такими данными уже существует' });
     }
 
     const patient = await Patient.create(req.body);
     const user = new User({
-      passportId: req.body.passportId,
       password: req.body.password,
       userType: 'пациент',
       patientId: patient._id
@@ -22,7 +21,7 @@ const createPatient = async (req, res) => {
     await user.save();
     res.status(201).json(patient);
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 };
 
@@ -32,7 +31,7 @@ const getAllPatients = async (req, res) => {
     const patients = await Patient.find();
     res.status(200).json(patients);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 };
 
@@ -45,7 +44,7 @@ const getPatientById = async (req, res) => {
     }
     res.status(200).json(patient);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 };
 
@@ -58,7 +57,7 @@ const updatePatient = async (req, res) => {
     }
     res.status(200).json(patient);
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 };
 
@@ -72,7 +71,7 @@ const deletePatient = async (req, res) => {
     await User.deleteOne({ patientId: req.params.id });
     res.status(204).json();
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 };
 

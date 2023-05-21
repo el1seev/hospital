@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { isAdmin } = require('../middleware/checkRole');
+const { isAdmin, isPatient } = require('../middleware/checkRole');
 const { authenticate } = require('../middleware/passport-auth');
 const patientController = require('../controllers/patient-controller');
 
@@ -9,7 +9,7 @@ const patientController = require('../controllers/patient-controller');
 router.get('/api/patients', authenticate, isAdmin, patientController.getAllPatients);
 
 // Получить информацию о конкретном пациенте
-router.get('/api/patients/:id', patientController.getPatientById);
+router.get('/api/patients/:id', authenticate, isPatient, patientController.getPatientById);
 
 // Создать нового пациента
 router.post('/api/patients/add', authenticate, isAdmin, patientController.createPatient);

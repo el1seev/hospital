@@ -14,6 +14,31 @@ createService = async (req, res) => {
   }
 };
 
+addServiceDescription = async (req, res) => {
+  try {
+  const { type, price } = req.body;
+  const { id } = req.params;
+  console.log(req.body)
+  if( price <= 0){
+    return res.status(400).json({ message: 'Цена не может равнятся или быть меньше ноля' });
+  }
+  const newDescription = {type: type, price: Number(price)};
+  const service = await Service.findById(id);
+
+  if (!service) {
+    return res.status(404).json({ message: 'Услуга не найдена' });
+  }
+
+  service.description.push(newDescription);
+  
+  const savedService = await service.save();
+
+  return res.status(201).json({ service: savedService });
+  } catch (error) {
+  return res.status(500).json({ message: 'Не удалось добавить услугу', error });
+  }
+};
+
 // Получить все услуги
 getAllServices = async (req, res) => {
   try {
@@ -84,4 +109,4 @@ deleteService = async (req, res) => {
   }
 };
 
-module.exports = {getAllServices, deleteService, getServiceById, updateService, createService};
+module.exports = {getAllServices, deleteService, getServiceById, updateService, createService, addServiceDescription};

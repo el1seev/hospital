@@ -4,11 +4,6 @@ const bcrypt = require('bcrypt');
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-  passportId: {
-    type: String,
-    required: [true, "Введите номер паспорта"],
-    unique: true
-  },
   password: {
     type: String,
     required: [true, 'Введите пароль']

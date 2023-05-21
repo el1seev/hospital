@@ -19,6 +19,11 @@ body {
   overflow-x: hidden;
 }
 
+h1
+{
+  color: #FFFFFF;
+}
+
 a
 {
   text-decoration: none;
