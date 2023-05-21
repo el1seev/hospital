@@ -1,6 +1,5 @@
 import axios from 'axios';
-import jwt_decode from 'jwt-decode';
-import { redirect } from 'react-router-dom';
+import { checkToken } from '../helpers/checkToken';
 
 export const fetchEmployees = async () => {
   try {
@@ -23,7 +22,6 @@ export const fetchServices = async () => {
 export const fetchSpecializations = async () => {
   try {
     const response = await axios.get('http://localhost:5000/api/specializations');
-    console.log(response.data)
     return response.data;
   } catch (error) {
     console.error(error);
@@ -33,7 +31,6 @@ export const fetchSpecializations = async () => {
 export const fetchCategories = async () => {
   try {
     const response = await axios.get('http://localhost:5000/api/categories');
-    console.log(response.data)
     return response.data;
   } catch (error) {
     console.error(error);
@@ -51,16 +48,9 @@ export const fetchAppointments = async (id) => {
 
 export const fetchAppointmentsByPatientId = async () => {
   try {
-    const token = localStorage.getItem('token');
-    if(token){
-      const decodedToken = jwt_decode(token);
-      const currentTime = Date.now() / 1000;
-      if (decodedToken.exp < currentTime) {
-        localStorage.removeItem('token');
-        window.location.href = '/auth';
-      }
-      const response = await axios.get(`http://localhost:5000/api/myappointments/${decodedToken.userId}`, { headers: { Authorization: `Bearer ${token}` } });
-      console.log(response.data);
+    const verifiedToken = checkToken();
+    if(verifiedToken){
+      const response = await axios.get(`http://localhost:5000/api/myappointments/${verifiedToken.decodedToken.userId}`, { headers: { Authorization: `Bearer ${verifiedToken.token}` } });
       return response.data;
     }
   } catch (error) {
@@ -70,15 +60,9 @@ export const fetchAppointmentsByPatientId = async () => {
 
 export const fetchAllPatients = async () => {
   try {
-    const token = localStorage.getItem('token');
-    if(token){
-      const decodedToken = jwt_decode(token);
-      const currentTime = Date.now() / 1000;
-      if (decodedToken.exp < currentTime) {
-        localStorage.removeItem('token');
-        window.location.href = '/auth';
-      }
-      const response = await axios.get(`http://localhost:5000/api/patients`, { headers: { Authorization: `Bearer ${token}` } });
+    const verifiedToken = checkToken();
+    if(verifiedToken){
+      const response = await axios.get(`http://localhost:5000/api/patients`, { headers: { Authorization: `Bearer ${verifiedToken.token}` } });
       return response.data;
     }
   } catch (error) {

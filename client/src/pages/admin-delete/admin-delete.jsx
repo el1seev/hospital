@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useNavigate} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getEmployees, getServices, getSpecializations } from '../../redux/actions/actions';
-import { adminDeleteOperations } from '../../api/admin-delete';
 import { fetchAllPatients, fetchCategories } from '../../api/fetchData';
+import UserDelete from '../../components/admin-delete-forms/user-delete';
+import DataDelete from '../../components/admin-delete-forms/data-delete';
 import './admin-delete.css';
 
 const AdminDelete = () => {
-  const [form , setForm] = useState({ name: ''});
   const [list, setList] = useState(null);
   const [categories, setCategories] = useState(null);
   const [patients, setPatients] = useState(null);
@@ -18,7 +17,6 @@ const AdminDelete = () => {
   const services = useSelector(state => state.services.services);
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleCategories = async () => {
     const categories = await fetchCategories();
@@ -29,22 +27,9 @@ const AdminDelete = () => {
     const patients = await fetchAllPatients();
     setPatients(patients);
   }
-  
-  const submit = async (event) => {
-    event.preventDefault();
-    const res = await adminDeleteOperations({...form, operation: operation});
-    if(res){
-      navigate('/admin', { replace: true });
-      window.location.reload();
-    } 
-  }
 
   const setAdminOperation = (value) => {
     setOperation(value);
-  }
-
-  const changeHandler = event => {
-    setForm({ ...form, [event.target.name]: event.target.value })
   }
 
   useEffect(() => {
@@ -86,22 +71,8 @@ const AdminDelete = () => {
         </ul>
       </div>
 
-      <div className='form-wrap'>
-        <form className='form'>
-          <h1>{operation}</h1>
-          <label>Введите название
-            <input onChange={changeHandler} type="text" list='options' id="name" name="name" placeholder="название"></input>
-              <datalist id='options'>
-                {
-                list !== null && list.map( i => (
-                  <option value={i._id} key={i._id}>{i.name}{i.passportId}</option>
-                ))
-                }
-              </datalist>
-          </label>
-          <button className="book-button" onClick={submit}>Отправить</button>
-        </form>
-      </div>
+      {operation !== 'удалить услугу' && operation !== 'удалить специализацию' && operation !== 'удалить категорию' && (<UserDelete list={list} operation={operation}/>)}
+      {operation !== 'удалить врача' && operation !== 'удалить пациента' && (<DataDelete  list={list} operation={operation}/>)}
     </div>
   );
 }

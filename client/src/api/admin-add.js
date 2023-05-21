@@ -1,16 +1,9 @@
-import jwt_decode from 'jwt-decode';
 import { addCategory, addDoctor, addPatient, addService, addServiceDescription, addSpecialization } from './sendData';
+import { checkToken } from '../helpers/checkToken';
 
 export const adminAddOperations = async (args) => {
-  console.log(args)
-  const token = localStorage.getItem('token');
-  if(token){
-    const decodedToken = jwt_decode(token);
-    const currentTime = Date.now() / 1000;
-    if (decodedToken.exp < currentTime) {
-      localStorage.removeItem('token');
-      window.location.href = '/auth';
-    }
+  const verifiedToken = checkToken();
+  if(verifiedToken){
   let res;
   switch(args.operation){
     case 'добавить врача':
