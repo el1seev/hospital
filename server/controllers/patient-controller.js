@@ -4,7 +4,6 @@ const User = require('../models/user');
 // Создание нового пациента
 const createPatient = async (req, res) => {
   try {
-    console.log(req.body)
     const { passportId } = req.body;
     // Проверяем, есть ли пользователь с таким passportId в базе данных
     const existingUser = await Patient.findOne({ passportId });
@@ -51,7 +50,8 @@ const getPatientById = async (req, res) => {
 // Обновление информации о пациенте
 const updatePatient = async (req, res) => {
   try {
-    const patient = await Patient.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const {id} = req.params;
+    const patient = await Patient.findByIdAndUpdate(id, req.body, { new: true });
     if (!patient) {
       return res.status(404).json({ message: 'Пациент не найден' });
     }
@@ -64,11 +64,12 @@ const updatePatient = async (req, res) => {
 // Удаление пациента
 const deletePatient = async (req, res) => {
   try {
-    const patient = await Patient.findByIdAndDelete(req.params.id);
+    const {id} = req.params;
+    const patient = await Patient.findByIdAndDelete(id);
     if (!patient) {
       return res.status(404).json({ message: 'Пациент не найден' });
     }
-    await User.deleteOne({ patientId: req.params.id });
+    await User.deleteOne({ patientId: id });
     res.status(204).json();
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });

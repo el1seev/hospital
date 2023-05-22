@@ -16,6 +16,7 @@ import Admin from "./pages/admin-profile/admin-profile";
 import BookAppointment from "./pages/book-appointment/book-appointment";
 import AdminAdd from "./pages/admin-add/admin-add";
 import AdminDelete from "./pages/admin-delete/admin-delete";
+import AdminUpdate from "./pages/admin-update/admin-update";
 
 const App = () => {
   const [modalActive, setModalActive] = useState(false);
@@ -99,8 +100,9 @@ const App = () => {
               (
               <>
                 <Route path='/admin' element={<Admin/>}/> 
-                <Route path='admin/add' element={<AdminAdd/>}/>
-                <Route path='admin/delete' element={<AdminDelete/>}/>
+                <Route path='/admin/add' element={<AdminAdd/>}/>
+                <Route path='/admin/update' element={<AdminUpdate/>}/>
+                <Route path='/admin/delete' element={<AdminDelete/>}/>
               </> 
               )
             }

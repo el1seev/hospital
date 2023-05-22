@@ -25,7 +25,7 @@ const UserDelete = (props) => {
     <div className='form-wrap'>
     <form className='form'>
       <h1>{props.operation}</h1>
-      <label>Введите по серии паспорта
+      <label>Выберите по серии паспорта
         <input onChange={changeHandler} type="text" list='options' id="name" name="name" placeholder="название"></input>
           <datalist id='options'>
             {

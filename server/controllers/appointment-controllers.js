@@ -39,7 +39,6 @@ const getAppointmentsByPatient = async (req, res) => {
     const userId = req.params.id;
     const user = await User.findById(userId);
 
-    console.log(user.patientId);
     const appointments = await Appointment
                                           .find({ patientId: user.patientId })
                                           .populate({
@@ -54,7 +53,6 @@ const getAppointmentsByPatient = async (req, res) => {
                                             }
                                           });
 
-    console.log(appointments);
     res.status(200).json({
       success: true,
       patientAppointments: appointments,
@@ -92,7 +90,6 @@ const cancelAppointment = async (req, res) => {
 //Занять талон
 const bookAppointment = async (req, res) => {
   try {
-    console.log(req.body)
     const { passportId, appointmentId } = req.body;
     const appointment = await Appointment.findById(appointmentId);
 

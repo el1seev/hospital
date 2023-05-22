@@ -68,23 +68,8 @@ const deleteAppointmentsForDoctor = async(appointmentsCollection, doctorId) => {
   await appointmentsCollection.deleteMany({ doctor: doctorId });
 }
 
-// Обновляем талоны для врача
-const  updateAppointmentsForDoctor = async (appointmentsCollection, doctorId, startDate, endDate, interval) => {
-  let current = moment(startDate);
-  while (current.isBefore(endDate)) {
-    const appointment = {
-      dateTime: current.format('LLLL'),
-      doctorId: doctorId,
-      status: "свободен"
-    };
-    await appointmentsCollection.updateOne({ time: current.toDate().toUTCString(), doctor: doctorId }, { $set: appointment }, { upsert: true });
-    current.add(interval);
-  }
-}
-
 module.exports = {
   createAppointmentsForAllDoctors,
   createAppointmentsForDoctor,
   deleteAppointmentsForDoctor,
-  updateAppointmentsForDoctor
 }

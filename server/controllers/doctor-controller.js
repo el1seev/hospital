@@ -4,7 +4,6 @@ const
 {   
     createAppointmentsForDoctor,
     deleteAppointmentsForDoctor,
-    updateAppointmentsForDoctor
 }
 = require('../utils/appoinmentsFunc');
 
@@ -53,12 +52,12 @@ const getDoctorById = async (req, res) => {
 // Обновление информации о враче
 const updateDoctor = async (req, res) => {
   try {
-    const doctor = await Doctor.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const {id}  = req.params;
+    const doctor = await Doctor.findByIdAndUpdate(id, req.body, { new: true });
     if (!doctor) {
       return res.status(404).json({ message: 'Врач не найден' });
     }
-    await updateAppointmentsForDoctor(appointmentsCollection, doctor._id, startDate, endDate, interval);
-    res.status(200).json(doctor);
+    res.status(200).json({success: true, message: `Данные ${doctor._id} были успешно обновлены`});
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }

@@ -8,6 +8,7 @@ const Admin = () => {
     <div className='admin-page'>
       <ul className='main-nav'>
         <li><Link to='/admin/add' className='main-nav-li'>Добавить</Link></li>
+        <li><Link to='/admin/update' className='main-nav-li'>Изменить</Link></li>
         <li><Link to='/admin/delete' className='main-nav-li'>Удалить</Link></li>
       </ul>
     </div>

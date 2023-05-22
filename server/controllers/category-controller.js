@@ -3,7 +3,6 @@ const Category = require('../models/category');
 // Создание новой категории
 const createCategory = async (req, res) => {
   try {
-    console.log(req.body)
     const category = await Category.create(req.body);
     await category.save();
     res.status(201).json(category);

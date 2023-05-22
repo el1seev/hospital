@@ -3,7 +3,6 @@ const Specialization = require('../models/specialization');
 // Создание новой специализации
 const createSpecialization = async (req, res) => {
   try {
-    console.log(req.body)
     const specialization = await Specialization.create(req.body);
     await specialization.save();
     res.status(201).json(specialization);

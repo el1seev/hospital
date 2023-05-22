@@ -20,6 +20,9 @@ router.put('/api/service/description/:id', authenticate, isAdmin, serviceControl
 // Обновить услугу по id
 router.put('/api/services/:id', authenticate, isAdmin, serviceController.updateService);
 
+// Обновить описание услуги по id
+router.put('/api/services/description/:id', authenticate, isAdmin, serviceController.updateServiceDescription);
+
 // Удалить услугу по id
 router.delete('/api/services/:id', authenticate, isAdmin, serviceController.deleteService);
 

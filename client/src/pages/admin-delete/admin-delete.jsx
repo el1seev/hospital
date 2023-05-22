@@ -30,18 +30,7 @@ const AdminDelete = () => {
 
   const setAdminOperation = (value) => {
     setOperation(value);
-  }
-
-  useEffect(() => {
-    dispatch(getSpecializations());
-    dispatch(getServices());
-    dispatch(getEmployees());
-    handleCategories();
-    handlePatients();
-  },[]);
-
-  useEffect(() => {
-    switch(operation){
+    switch(value){
       case 'удалить врача':
         setList(employees);
         break;
@@ -61,7 +50,15 @@ const AdminDelete = () => {
         setList(employees);
         break;
     }
-  }, [operation])
+  }
+
+  useEffect(() => {
+    dispatch(getSpecializations());
+    dispatch(getServices());
+    handleCategories();
+    dispatch(getEmployees());
+    handlePatients();
+  },[]);
 
   return (
     <div className="admin-add-page">

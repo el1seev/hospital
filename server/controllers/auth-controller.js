@@ -10,7 +10,6 @@ const { JWT_SECRET } = process.env;
 // Контроллер для аутентификации пользователя
 const login = async (req, res) => {
   try {
-    console.log(req.body)
 
     if(req.body.passportId !== 'админ'){
       // Находим пользователя в базе данных по логину
