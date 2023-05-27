@@ -10,5 +10,6 @@ export const removeEmptyFields = (obj) => {
 export const filterObject = (obj) => {
   const filteredObj = { ...obj };
   delete filteredObj.id;
+  delete filteredObj.operation;
   return filteredObj;
 }

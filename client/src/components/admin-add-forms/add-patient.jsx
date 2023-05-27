@@ -4,8 +4,7 @@ import { useNavigate} from 'react-router-dom';
 import { adminAddOperations } from '../../api/admin-add';
 
 const AddPatient = (props) => {
-  const [form , setForm] = useState({
-    passport: '', firstName: '', secondName: '', middleName: '', phone: '',
+  const [form , setForm] = useState({ passport: '', firstName: '', secondName: '', middleName: '', phone: '',
     address: '',dateOfBirth: '', gender: '', password: ''});
 
   const navigate = useNavigate();

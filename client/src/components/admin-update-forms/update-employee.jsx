@@ -9,8 +9,8 @@ import { adminUpdateOperations } from '../../api/admin-update';
 
 const UpdateEmployee = (props) => {
   const [form , setForm] = useState({
-    passportId: '', firstName: '', secondName: '', middleName: '', specialization: '',
-    category: '', shift: ''});
+    passportId: '', firstName: '', secondName: '', middleName: '',
+    categoryId: '', specializationId: '', shift: ''});
   const [currentEmployee, setCurrentEmployee] = useState(null)
   const [categories, setCategories] = useState(null);
   const specializations = useSelector(state => state.specializations.specializations);
@@ -78,8 +78,8 @@ const UpdateEmployee = (props) => {
           <label>Изменить отчество (текущее: {currentEmployee.middleName})
             <input onChange={changeHandler} type="text" id="middleName" name="middleName" placeholder="Геннадьевич"></input>
           </label>
-          <label>Изменить специализацию из выпадающего списка (текущая: {currentEmployee.specialization.name})
-            <input onChange={changeHandler} type="text" list='optionsSpec' id="specialization" name="specialization" placeholder='нажмите два раза'>
+          <label>Изменить специализацию из выпадающего списка (текущая: {currentEmployee.specializationId.name})
+            <input onChange={changeHandler} type="text" list='optionsSpec' id="specializationId" name="specializationId" placeholder='нажмите два раза'>
             </input>
               <datalist id='optionsSpec'>
                 {
@@ -89,8 +89,8 @@ const UpdateEmployee = (props) => {
                 }
               </datalist>
           </label>
-          <label>Изменить категорию(текущая: {currentEmployee.category.name})
-            <input onChange={changeHandler} type="text" list='optionsCategory' id="shift" name="shift" placeholder="1-я">
+          <label>Изменить категорию(текущая: {currentEmployee.categoryId.name})
+            <input onChange={changeHandler} type="text" list='optionsCategory' id="categoryId" name="categoryId" placeholder="2-я">
             </input>
               <datalist id='optionsCategory'>
                 { categories !== null && categories.map( category => (

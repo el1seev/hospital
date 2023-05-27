@@ -5,8 +5,7 @@ import createInitials from '../../helpers/createInitials';
 import { adminUpdateOperations } from '../../api/admin-update';
 
 const UpdatePatient = (props) => {
-  const [form , setForm] = useState({
-    passportId: '', firstName: '', secondName: '', middleName: '',
+  const [form , setForm] = useState({passportId: '', firstName: '', secondName: '', middleName: '',
     address: '', phone: ''});
   const [currentPatient, setCurrentPatient] = useState(null);
   

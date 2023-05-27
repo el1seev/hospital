@@ -1,34 +1,21 @@
 import { addCategory, addDoctor, addPatient, addService, addServiceDescription, addSpecialization } from './sendData';
 import { checkToken } from '../helpers/checkToken';
+import { filterObject, removeEmptyFields } from '../helpers/filterObjects';
 
 export const adminAddOperations = async (args) => {
   const verifiedToken = checkToken();
   if(verifiedToken){
   let res;
+  let newObj = removeEmptyFields(args);
+  let filteredObj = filterObject(args);
   switch(args.operation){
     case 'добавить врача':
       res = await addDoctor
-      ({passportId: args.passport,
-        firstName: args.firstName,
-        secondName: args.secondName,
-        middleName: args.middleName,
-        dateOfBirth: args.dateOfBirth,
-        specialization: args.specialization,
-        category: args.category,
-        password: args.password,
-        shift: args.shit })
+      ({...filteredObj});
       return res.data;
     case 'добавить пациента':
       res = await addPatient
-      ({passportId: args.passport,
-        firstName: args.firstName,
-        secondName: args.secondName,
-        middleName: args.middleName,
-        dateOfBirth: args.dateOfBirth,
-        address: args.address,
-        phone: args.phone,
-        gender: args.gender,
-        password: args.password})
+      ({...filteredObj});
       return res.data
     case 'добавить специализацию':
       res = await addSpecialization({name: args.name})

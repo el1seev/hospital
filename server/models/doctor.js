@@ -45,12 +45,12 @@ const DoctorSchema = new Schema({
       message: 'Некорректная дата'
     }
   },
-  specialization: {
+  specializationId: {
     type: Schema.Types.ObjectId,
     ref: 'Specialization',
     required: true
   },
-  category: {
+  categoryId: {
     type: Schema.Types.ObjectId,
     ref: 'Category',
     required: true

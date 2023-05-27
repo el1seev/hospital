@@ -7,9 +7,8 @@ import { fetchCategories } from '../../api/fetchData';
 import { adminAddOperations } from '../../api/admin-add';
 
 const AddEmployee = (props) => {
-  const [form , setForm] = useState({
-    passport: '', firstName: '', secondName: '', middleName: '', specialization: '',
-    category: '', dateOfBirth: '', shift: '', password: ''});
+  const [form , setForm] = useState({passportId: '', firstName: '', secondName: '', middleName: '',
+  categoryId: '', specializationId: '', dateOfBirth: '', shift: '', password: ''});
   const [categories, setCategories] = useState(null);
   const specializations = useSelector(state => state.specializations.specializations);
 
@@ -46,7 +45,7 @@ const AddEmployee = (props) => {
     <form className='form'>
       <h1>{props.operation}</h1>
       <label>Введите серию паспорта
-            <input onChange={changeHandler} type="text" id="passport" name="passport" placeholder="AB0000000"></input>
+            <input onChange={changeHandler} type="text" id="passportId" name="passportId" placeholder="AB0000000"></input>
           </label>
           <label>Введите имя
             <input onChange={changeHandler} type="text" id="firstName" name="firstName" placeholder="Сергей"></input>
@@ -61,7 +60,7 @@ const AddEmployee = (props) => {
             <input onChange={changeHandler} type="text" id="dateOfBirth" name="dateOfBirth" placeholder="28-02-2000"></input>
           </label>
           <label>Выберите специализацию из выпадающего списка
-            <input onChange={changeHandler} type="text" list='optionsSpec' id="specialization" name="specialization" placeholder='нажмите два раза'>
+            <input onChange={changeHandler} type="text" list='optionsSpec' id="specializationId" name="specializationId" placeholder='нажмите два раза'>
             </input>
               <datalist id='optionsSpec'>
                 {
@@ -72,7 +71,7 @@ const AddEmployee = (props) => {
               </datalist>
           </label>
           <label>Выберите категорию
-            <input onChange={changeHandler} type="text" list='optionsCategory' id="shift" name="shift" placeholder="1-я">
+            <input onChange={changeHandler} type="text" list='optionsCategory' id="categoryId" name="categoryId" placeholder="высшая">
             </input>
               <datalist id='optionsCategory'>
                 { categories !== null && categories.map( category => (

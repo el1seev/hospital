@@ -6,28 +6,28 @@ import { getEmployees, getSpecializations } from '../../redux/actions/actions';
 import ReceptionTel from '../../components/reception-tel/reception-tel';
 import DoctorLogo from '../../assets/svgs/doctor-logo';
 import './book-appointment.css';
+import createInitials from '../../helpers/createInitials';
 
 const BookAppointment = () => {
   const specializations = useSelector(state => state.specializations.specializations);
   const employees = useSelector(state => state.employees.employees);
   const [filteredEmployees, setEmployees] = useState(null);
+  
   const dispatch = useDispatch();
-
-  const handleSpecializations = async () => {
-    dispatch(getSpecializations());
-  }
 
   const filterBySpecialization = async (specializationId) => {
     console.log(employees)
     const employeesBySpecialization = await employees.filter(( employee ) => {
-      return employee.specialization._id === specializationId;
+      return employee.specializationId._id === specializationId;
     })
     setEmployees(employeesBySpecialization);
   }
 
   useEffect(() => {
-    handleSpecializations();
-    if(!employees){
+    if(specializations.length === 0){
+      dispatch(getSpecializations());
+    }
+    if(employees.length === 0){
       dispatch(getEmployees());
     }
   }, [])
@@ -45,8 +45,8 @@ const BookAppointment = () => {
                 <DoctorLogo/>
               </div>
               <div className='doctor-descriptions'>
-                <p className='doctor-info'>{employee.firstName}</p>
-                <p className='doctor-info'>{employee.specialization.name}, {employee.shift} категория</p>
+                <p className='doctor-info'>{createInitials(employee.firstName, employee.secondName, employee.middleName)}</p>
+                <p className='doctor-info'>{employee.specializationId.name}, {employee.shift} категория</p>
               </div>
               <Link to={`/employees/${employee._id}/appointments`} className='book-button'>Запись</Link>
             </div>

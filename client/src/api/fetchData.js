@@ -4,6 +4,7 @@ import { checkToken } from '../helpers/checkToken';
 export const fetchEmployees = async () => {
   try {
     const response = await axios.get('http://localhost:5000/api/doctors');
+    console.log(response.data)
     return response.data;
   } catch (error) {
     console.error(error);

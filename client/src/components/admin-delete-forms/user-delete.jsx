@@ -26,7 +26,7 @@ const UserDelete = (props) => {
     <form className='form'>
       <h1>{props.operation}</h1>
       <label>Выберите по серии паспорта
-        <input onChange={changeHandler} type="text" list='options' id="name" name="name" placeholder="название"></input>
+        <input onChange={changeHandler} type="text" list='options' id="passport" name="passport" placeholder="название"></input>
           <datalist id='options'>
             {
             props.list !== null && props.list.map( i => (

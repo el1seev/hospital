@@ -1,5 +1,6 @@
 const Appointment = require('../models/appointment');
 const User = require('../models/user');
+const Patient = require('../models/patient');
 
 // Контроллер для получения талонов конкретного врача
 const getAppointmentsByDoctor = async (req, res) => {
@@ -12,7 +13,7 @@ const getAppointmentsByDoctor = async (req, res) => {
                                             path: 'doctorId',
                                             select: 'firstName secondName middleName',
                                             populate: {
-                                              path: 'specialization',
+                                              path: 'specializationId',
                                               select: 'name'
                                             },
                                             options: {
@@ -45,7 +46,7 @@ const getAppointmentsByPatient = async (req, res) => {
                                             path: 'doctorId',
                                             select: 'firstName secondName middleName',
                                             populate: {
-                                              path: 'specialization',
+                                              path: 'specializationId',
                                               select: 'name'
                                             },
                                             options: {
@@ -100,7 +101,6 @@ const bookAppointment = async (req, res) => {
     if (appointment.status === 'занят') {
       return res.status(400).json({ message: 'Талон уже занят' });
     }
-
     const patient = await Patient.findOne({passportId: passportId});
     const patientAppointments = await Appointment
                                                 .find({ patientId: patient._id })
@@ -108,15 +108,14 @@ const bookAppointment = async (req, res) => {
                                                   path: 'doctorId',
                                                   select: 'firstName secondName middleName',
                                                   populate: {
-                                                    path: 'specialization',
+                                                    path: 'specializationId',
                                                     select: 'name'
                                                   },
                                                   options: {
-                                                    strictPopulate: false
+                                                    strictPopulate: false 
                                                   }
                                                 });
     const doctorAppointments = patientAppointments.filter(appointment => appointment.doctorId === appointment.doctorId);
-
     if (doctorAppointments.length > 0) {
       return res.status(400).json({ message: 'Пациент уже занял талон у данного врача' });
     }
@@ -124,7 +123,6 @@ const bookAppointment = async (req, res) => {
     appointment.patientId = patient._id;
     appointment.status = 'занят';
     const updatedAppointment = await appointment.save();
-
     return res.status(200).json({ appointment: updatedAppointment });
   } catch (error) {
     return res.status(500).json({ message: 'Не удалось занять талон', error });

@@ -29,6 +29,8 @@
   text-align: center;
   border: 3px solid aliceblue;
   border-radius: 30px;
+  display: flex;
+  flex-direction: column;
 }
 
 label

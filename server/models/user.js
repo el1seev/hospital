@@ -24,10 +24,16 @@ const UserSchema = new Schema({
 },{ timestamps: true });
 
 UserSchema.pre('save', async function(next){
-  const user = this;
-  const hash = await bcrypt.hash(this.password, 10);
-  this.password = hash;
-  next();
+  if (!this.patientId && !this.doctorId) {
+    next(new Error('Either patientId or doctorId must be provided'));
+  } else if (this.patientId && this.doctorId) {
+    next(new Error('Only one of patientId or doctorId can be provided'));
+  } else {
+    const user = this;
+    const hash = await bcrypt.hash(this.password, 10);
+    this.password = hash;
+    next();
+  }
 });
 
 UserSchema.methods.isValidPassword = async function(password){

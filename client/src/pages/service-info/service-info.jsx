@@ -6,19 +6,15 @@ import { getServices } from '../../redux/actions/actions';
 import './service-info.css';
 
 const ServiceInfo = () => {
-  const services = useSelector(state => state.services.services);
   const { id } = useParams();
+  const services = useSelector(state => state.services.services);
   const service = services.find(service => service._id === id);
 
   const dispatch = useDispatch();
 
-  const handleServices = async () => {
-    await dispatch(getServices());
-  }
-
   useEffect(() => {
     if(!service){ 
-      handleServices();
+      dispatch(getServices());
     }
   }, []);
 

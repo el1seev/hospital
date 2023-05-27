@@ -4,7 +4,7 @@ import { useNavigate} from 'react-router-dom';
 import { adminDeleteOperations } from '../../api/admin-delete';
 
 const DataDelete = (props) => {
-  const [form , setForm] = useState({ passport: ''});
+  const [form , setForm] = useState({ name: ''});
 
   const navigate = useNavigate();
 

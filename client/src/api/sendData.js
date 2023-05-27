@@ -28,6 +28,7 @@ export const addDoctor = async (args) => {
   try {
     const verifiedToken = checkToken();
     if(verifiedToken){
+      console.log(args)
       let response = await axios.post('http://localhost:5000/api/doctors/add', {...args}, { headers: { Authorization: `Bearer ${verifiedToken.token}` }});
       return response.data;
     }

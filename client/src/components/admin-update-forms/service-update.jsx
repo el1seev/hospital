@@ -44,7 +44,7 @@ const UpdateService = (props) => {
                 <label>Изменить название (текущее: {currentService.name})
             <input onChange={changeHandler} type="text" id="name" name="name" placeholder="услуга"></input>
           </label>
-          <label>Изменить картинку (текущая: {currentService.image})
+          <label>Изменить изображение
             <input onChange={changeHandler} type="text" id="image" name="image" placeholder="URL"></input>
           </label>
           <button className="book-button" onClick={submit}>Отправить</button>

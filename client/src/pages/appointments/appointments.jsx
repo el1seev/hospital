@@ -13,8 +13,7 @@ const Appointments = () => {
   const [appointments, setAppointments] = useState(null);
   const [appointmentId, setAppointmentId] = useState('');
   const [formActive, setStateForm] = useState(false);
-  const [form , setForm] = useState({
-    passport: ''});
+  const [form , setForm] = useState({passport: ''});
   
   const { id } = useParams();
   const navigate = useNavigate();
@@ -64,7 +63,7 @@ const Appointments = () => {
         <div className='appointments-wrap'>
         {
           appointments.map( appointment => (
-            <AppointmentItem appointment={appointment} setActive={setActive}/>
+            <AppointmentItem appointment={appointment} setActive={setActive} key={appointment._id}/>
           ))
         }
         </div>

@@ -10,6 +10,7 @@ const
 // Создание нового врача
 const createDoctor = async (req, res) => {
   try {
+    console.log(req.body)
     const doctor = await Doctor.create(req.body);
     const user = new User({
       password: req.body.password,
@@ -17,7 +18,6 @@ const createDoctor = async (req, res) => {
       doctorId: doctor._id
     });
     await user.save();
-    await createAppointmentsForDoctor(appointmentsCollection, startDate, endDate, interval, doctor._id);
     res.status(201).json(doctor);
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
@@ -28,8 +28,9 @@ const createDoctor = async (req, res) => {
 const getAllDoctors = async (req, res) => {
   try {
     const doctors = await Doctor.find()
-    .populate('specialization', 'name')
-    .populate('category', 'name');
+    .populate('specializationId', 'name')
+    .populate('categoryId', 'name');
+    console.log(doctors)
     res.status(200).json(doctors);
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });

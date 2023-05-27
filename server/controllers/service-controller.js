@@ -69,17 +69,12 @@ getServiceById = async (req, res) => {
 updateService = async (req, res) => {
   try {
   const { id } = req.params;
-  const { name, image, description } = req.body;
 
-  const service = await Service.findById(id);
+  const service = await Service.findByIdAndUpdate(id, req.body, {new: true});
 
   if (!service) {
     return res.status(404).json({ message: 'Услуга не найдена' });
   }
-
-  service.name = name;
-  service.image = image;
-
   const savedService = await service.save();
 
   return res.status(200).json({ service: savedService });
