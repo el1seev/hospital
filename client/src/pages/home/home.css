@@ -19,30 +19,60 @@
   width: fit-content;
 }
 
-.main-nav-li
+.main-nav-li, .main-nav-li_black, .main-nav-li_white
 {
   display: block;
   width: fit-content;
   font-style: normal;
   font-weight: 700;
   font-size: calc(55px + 17 * (100vw/ 1440));
-  color: #FFFFFF;
   -webkit-text-stroke: 1.5px #A8A8A8;
   text-shadow: 0px 6px 6px rgba(0, 0, 0, 0.25);
   margin-top: 5px;
 }
 
-.schedule
+.schedule, .schedule_black, .schedule_white
 {
   font-style: normal;
   font-weight: 700;
   font-size: calc(35px + 5 * (100vw/ 1440));
   line-height: 56px;
+  margin: 0;
+}
+
+.schedule
+{
   color: #FFFFFF;
   -webkit-text-stroke: 1.5px #A8A8A8;
   text-shadow: 0px 6px 6px rgba(0, 0, 0, 0.25);
-  margin: 0;
 }
+
+.main-nav-li_black, .schedule_black, .address_black
+{
+  color: #000000;
+  -webkit-text-stroke:0cm;
+  text-shadow:none;
+}
+
+.main-nav-li_white, .schedule_white, .address_white
+{
+  color: #FFFFFF;
+  -webkit-text-stroke:0cm;
+  text-shadow:none;
+}
+
+.main-nav-li_black:hover
+{
+  color: #000000;
+  border-bottom: 1px solid black;
+}
+
+.main-nav-li_white:hover
+{
+  color: #FFFFFF;
+  border-bottom: 1px solid #ffffff;
+}
+
 
 .address-wrap
 {
@@ -54,12 +84,16 @@
   margin: 30px 0px 10px 0px;
 }
 
-.address
+.address, .address_black, .address_white
 {
   font-style: normal;
   font-weight: 700;
   font-size: calc(35px + 5 * (100vw / 1440));
   line-height: 56px;
+}
+
+.address
+{
   color: #FFFFFF;
   -webkit-text-stroke: 1.5px #A8A8A8;
   text-shadow: 0px 6px 6px rgba(0, 0, 0, 0.25);

@@ -20,6 +20,10 @@ import './App.css';
 
 const App = () => {
   const [modalActive, setModalActive] = useState(false);
+  const [visuallyChangerActive, setChangerActive] = useState(false);
+  const [backColor, setBackgroundColor] = useState('');
+  const [textColor, setTextColor] = useState('');
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [user, setUser] = useState(null);
 
   const setActive = () => {
@@ -32,7 +36,16 @@ const App = () => {
     }
   }
 
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const setVisuallyChangerActive = () => {
+    setChangerActive(!visuallyChangerActive);
+    setBackgroundColor('white');
+    setTextColor('black');
+  }
+
+  const setVisualColor = (backgroundColor, txtColor) => {
+    setBackgroundColor(backgroundColor);
+    setTextColor(txtColor);
+  }
 
   useEffect(() => {
     function handleResize() {
@@ -56,7 +69,19 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <Nav setActive={setActive} modalActive={modalActive} user={user}/>
+        <div className="visually-block" style={ !!visuallyChangerActive ? {backgroundColor: backColor} : null}>
+          <button className="visually-changer" style={{backgroundColor: `${backColor}`, color: `${textColor}`, border: `1px solid ${textColor}`}} onClick={setVisuallyChangerActive}>РЕЖИМ ДЛЯ СЛАБОВИДЯЩИХ: {visuallyChangerActive ? "ВКЛ" : "ВЫКЛ"}</button>
+          {
+            !!visuallyChangerActive &&
+            (
+              <>
+              <button className="text-changer" style={{backgroundColor: 'white', color: 'black', border: '1px solid black'}} onClick={e => setVisualColor('white', 'black')}>А</button>
+              <button className="text-changer" style={{backgroundColor: 'black', color: 'white', border: '1px solid white'}} onClick={e => setVisualColor('black', 'white')}>А</button>
+              </>
+            )
+          }
+        </div>
+        <Nav setActive={setActive} modalActive={modalActive} user={user} backgroundStyle={ visuallyChangerActive ? {backgroundColor: `${backColor}`, backgroundImage: 'none'} : null} text={visuallyChangerActive ?  {color: `${textColor}`} : null}/>
       </header>
 
       <div className={ !modalActive ? 'modal-nav' : 'modal-nav aсtive'}>
@@ -71,8 +96,8 @@ const App = () => {
 
       <main className='App-main'>
           <Routes>
-            <Route path='/' element={<Home/>}/>
-            <Route path='/home' element={<Home/>}/>
+            <Route path='/' element={<Home backgroundStyle={ visuallyChangerActive ? {backgroundImage: 'none', backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ?  {color: `${textColor}`} : null}/>}/>
+            <Route path='/home' element={<Home backgroundStyle={ visuallyChangerActive ? {backgroundImage: 'none', backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ?  {color: `${textColor}`} : null}/>}/>
             <Route path='/employees' element={<Employees/>}/>
             <Route path='/employees/:id/appointments' element={<Appointments/>}/>
             <Route path='/services' element={<Services/>}/>
@@ -97,7 +122,7 @@ const App = () => {
       </main>
 
       <footer className='App-footer'>
-        <Footer/>
+        <Footer backgroundStyle={ visuallyChangerActive ? { backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ?  {color: `${textColor}`} : null}/>
       </footer>
     </div>
   );

@@ -2,20 +2,21 @@ import { Link } from 'react-router-dom';
 import './home.css';
 import Mark from '../../assets/svgs/mark';
 
-const Home = () => {
+const Home = (props) => {
+  console.log(props.text)
   return (
-    <div className="home">
-      <p className='schedule'>ВРЕМЯ РАБОТЫ:<br/> ПН-ПТ с 8:00 до 17:00</p>
+    <div className="home" style={props.backgroundStyle}>
+      <p className={props.text === null ? 'schedule' : `schedule_${props.text.color}`}>ВРЕМЯ РАБОТЫ:<br/> ПН-ПТ с 8:00 до 17:00</p>
       <ul className='main-nav'>
-        <li><Link to='/book-appointment' className='main-nav-li'>Запись на приём</Link></li>
-        <li><Link to='/services' className='main-nav-li'>Услуги</Link></li>
-        <li><Link to='/employees' className='main-nav-li'>Сотрудники</Link></li>
-        <li><Link to='/about-us' className='main-nav-li'>О нас</Link></li>
+        <li><Link to='/book-appointment' className={props.text === null ? 'main-nav-li' : `main-nav-li_${props.text.color}`}>Запись на приём</Link></li>
+        <li><Link to='/services' className={props.text === null ? 'main-nav-li' : `main-nav-li_${props.text.color}`}>Услуги</Link></li>
+        <li><Link to='/employees' className={props.text === null ? 'main-nav-li' : `main-nav-li_${props.text.color}`}>Сотрудники</Link></li>
+        <li><Link to='/about-us' className={props.text === null ? 'main-nav-li' : `main-nav-li_${props.text.color}`}>О нас</Link></li>
       </ul>
 
       <div className='address-wrap'>
-        <Mark className='mark'/>
-        <p className='address'>г. Брест, ул. Пушкина, д. 35</p>
+        {props.text === null && <Mark className='mark'/>}
+        <p className={props.text === null ? 'address' : `address_${props.text.color}`}>г. Брест, ул. Пушкина, д. 35</p>
       </div>
     </div>
   );

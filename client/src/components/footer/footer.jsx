@@ -1,25 +1,25 @@
 import { Link } from 'react-router-dom';
 import './footer.css';
 
-const Footer = () => {
+const Footer = (props) => {
   return (
-    <div className='footer'>
+    <div className={props.text === null ? 'footer' : `footer_${props.text.color}`} style={props.backgroundStyle}>
       <div className='footer-tel'>
           <div>
-          <p className='footer-tel-info'>ОБЩЕНАЦИОНАЛЬНАЯ ДЕСТКАЯ ЛИНИЯ ДЛЯ ПОСТРАДАВШИХ ОТ ДОМАШНЕГО НАСИЛИЯ:
-          <br/><span className='tel'>+375 (33) xxx-xx-xx</span>
+          <p className={props.text === null ? 'footer-tel-info' : `footer-tel-info_${props.text.color}`}>ОБЩЕНАЦИОНАЛЬНАЯ ДЕСТКАЯ ЛИНИЯ ДЛЯ ПОСТРАДАВШИХ ОТ ДОМАШНЕГО НАСИЛИЯ:
+          <br/><span className={props.text === null ? 'tel' : `tel_${props.text.color}`}>+375 (33) xxx-xx-xx</span>
           </p>
-          <p className='footer-tel-info'>ТЕЛЕФОН ДОВЕРИЯ:
-          <br/><span className='tel'>+375 (33) xxx-xx-xx</span>
+          <p className={props.text === null ? 'footer-tel-info' : `footer-tel-info_${props.text.color}`}>ТЕЛЕФОН ДОВЕРИЯ:
+          <br/><span className={props.text === null ? 'tel' : `tel_${props.text.color}`}>+375 (33) xxx-xx-xx</span>
           </p>
           </div>
   
           <div>
-          <p className='footer-tel-info'>ОБЩЕНАЦИОНАЛЬНАЯ БЕСПЛАТНАЯ ЛИНИЯ ДЛЯ ПОСТРАДАВШИХ ОТ  ДОМАШНЕГО НАСИЛИЯ:
-          <br/><span className='tel'>+375 (33) xxx-xx-xx</span>
+          <p className={props.text === null ? 'footer-tel-info' : `footer-tel-info_${props.text.color}`}>ОБЩЕНАЦИОНАЛЬНАЯ БЕСПЛАТНАЯ ЛИНИЯ ДЛЯ ПОСТРАДАВШИХ ОТ  ДОМАШНЕГО НАСИЛИЯ:
+          <br/><span className={props.text === null ? 'tel' : `tel_${props.text.color}`}>+375 (33) xxx-xx-xx</span>
           </p>
-          <p className='footer-tel-info'>ТЕЛЕФОН ДОВЕРИЯ ДЛЯ ОКАЗАНИЯ ЭКСТРЕННОЙ ПСИХОЛОГИЧЕСКОЙ ПОМОЩИ: 
-          <br/><span className='tel'>+375 (33) xxx-xx-xx</span>
+          <p className={props.text === null ? 'footer-tel-info' : `footer-tel-info_${props.text.color}`}>ТЕЛЕФОН ДОВЕРИЯ ДЛЯ ОКАЗАНИЯ ЭКСТРЕННОЙ ПСИХОЛОГИЧЕСКОЙ ПОМОЩИ: 
+          <br/><span className={props.text === null ? 'tel' : `tel_${props.text.color}`}>+375 (33) xxx-xx-xx</span>
           </p>
           </div>
       </div>
@@ -27,12 +27,12 @@ const Footer = () => {
 
         <div className='footer-info'>
           <div className='footer-nav'>
-            <ul className='info'>
+            <ul className={props.text === null ? 'info' : `info_${props.text.color}`}>
               ИНФОРМАЦИЯ:
               <li><Link to='/about-us'>о нас</Link></li>
               <li><Link to='/employees'>сотрудники</Link></li>
             </ul>
-            <ul className='info'>
+            <ul className={props.text === null ? 'info' : `info_${props.text.color}`}>
               КОНСУЛЬТАЦИЯ:
               <li><Link to='/services'>услуги</Link></li>
               <li><Link to='/book-appointment'>запись на приём</Link></li>
@@ -43,29 +43,29 @@ const Footer = () => {
             {
               /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ?
               <>
-                <a className='footer-tel-info' href='+375(29)123-12-12'>Горячая линия:
-                <br/><span className='tel'>+375(29)123-12-12</span>
+                <a className={props.text === null ? 'footer-tel-info' : `footer-tel-info_${props.text.color}`} href='+375(29)123-12-12'>Горячая линия:
+                <br/><span className={props.text === null ? 'tel' : `tel_${props.text.color}`}>+375(29)123-12-12</span>
                 </a>
 
-                <a className='footer-tel-info' href='+375(29)123-12-12'>Анонимный звонок:
-                <br/><span className='tel'>+375(29)123-12-12</span>
+                <a className={props.text === null ? 'footer-tel-info' : `footer-tel-info_${props.text.color}`} href='+375(29)123-12-12'>Анонимный звонок:
+                <br/><span className={props.text === null ? 'tel' : `tel_${props.text.color}`}>+375(29)123-12-12</span>
                 </a>
               </>
               :
               <>
-                <p className='footer-tel-info'>Горячая линия:
-                <br/><span className='tel'>+375 (33) xxx-xx-xx</span>
+                <p className={props.text === null ? 'footer-tel-info' : `footer-tel-info_${props.text.color}`}>Горячая линия:
+                <br/><span className={props.text === null ? 'tel' : `tel_${props.text.color}`}>+375 (33) xxx-xx-xx</span>
                 </p>
 
-                <p className='footer-tel-info'>Анонимный звонок:
-                <br/><span className='tel'>+375 (33) xxx-xx-xx</span>
+                <p className={props.text === null ? 'footer-tel-info' : `footer-tel-info_${props.text.color}`}>Анонимный звонок:
+                <br/><span className={props.text === null ? 'tel' : `tel_${props.text.color}`}>+375 (33) xxx-xx-xx</span>
                 </p>
               </>
             }
 
           </div>
 
-          <div className='footer-schedule'>
+          <div className={props.text === null ? 'footer-schedule' : `footer-schedule_${props.text.color}`}>
             <p>
               график приёма врачей: пн-пт с 8:00 до 17:00
             </p>

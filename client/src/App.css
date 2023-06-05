@@ -9,7 +9,7 @@
 
 .App-header
 {
-  height: 100px;
+  height: fit-content;
   z-index: 100;
   width: 100%;
 }
@@ -77,6 +77,58 @@
   justify-content: center;
   height: 100%;
   margin: 0;
+}
+
+.visually-block
+{
+  display: flex;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  background-color: rgb(75, 75, 75);
+  position: relative;
+}
+
+.visually-changer
+{
+  position: absolute;
+  right: 30px;
+  width: 400px;
+  height: 35px;
+  cursor: pointer;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-size: calc(18px + 2 * (100vw/ 1440));
+}
+
+.visually-changer
+{
+  color: #ffffff;
+  background-color: rgb(75, 75, 75);
+  border: 1.5px solid #ffffff;
+}
+
+.visually-changer_black
+{
+  color: #000000;
+  background-color: #ffffff;
+  border: 1.5px solid #000000;
+}
+
+.visually-changer_white
+{
+  color: #ffffff;
+  background-color: #000000;
+  border: 1.5px solid #ffffff;
+}
+
+.text-changer
+{
+  width: 35px;
+  height: 35px;
+  margin: 0px 30px 0px 30px;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1098px) {
