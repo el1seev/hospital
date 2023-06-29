@@ -1,10 +1,10 @@
 import axios from 'axios';
+
 import { checkToken } from '../helpers/checkToken';
 
 export const fetchEmployees = async () => {
   try {
     const response = await axios.get('http://localhost:5000/api/doctors');
-    console.log(response.data)
     return response.data;
   } catch (error) {
     console.error(error);
@@ -45,28 +45,31 @@ export const fetchAppointments = async (id) => {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
 export const fetchAppointmentsByPatientId = async () => {
   try {
     const verifiedToken = checkToken();
     if(verifiedToken){
-      const response = await axios.get(`http://localhost:5000/api/myappointments/${verifiedToken.decodedToken.userId}`, { headers: { Authorization: `Bearer ${verifiedToken.token}` } });
+      const response = await axios.get(
+        `http://localhost:5000/api/myappointments/${verifiedToken.decodedToken.userId}`,
+        { headers: { Authorization: `Bearer ${verifiedToken.token}` } }
+      );
       return response.data;
     }
   } catch (error) {
     console.error(error);
   }
-}
+};
 
 export const fetchAllPatients = async () => {
   try {
     const verifiedToken = checkToken();
     if(verifiedToken){
-      const response = await axios.get(`http://localhost:5000/api/patients`, { headers: { Authorization: `Bearer ${verifiedToken.token}` } });
+      const response = await axios.get('http://localhost:5000/api/patients', { headers: { Authorization: `Bearer ${verifiedToken.token}` } });
       return response.data;
     }
   } catch (error) {
     console.error(error);
   }
-}
+};

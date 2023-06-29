@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { isAdmin } = require('../middleware/checkRole');
 const { authenticate } = require('../middleware/passport-auth');
-const specializationController = require('../controllers/specialty-controller')
+const specializationController = require('../controllers/specialty-controller');
 
 // Получить все специализации
 router.get('/api/specializations', specializationController.getAllSpecializations);

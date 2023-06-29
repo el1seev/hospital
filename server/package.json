@@ -5,7 +5,10 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write ."
   },
   "author": "Yeliseev Sergei",
   "license": "ISC",
@@ -22,5 +25,11 @@
     "nodemon": "^2.0.22",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.43.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.8"
   }
 }

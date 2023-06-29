@@ -1,22 +1,24 @@
-import { Routes, Route, Link} from "react-router-dom";
-import { useState, useEffect } from "react";
+import { Routes, Route, Link} from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 import Nav from './components/nav/nav';
-import Footer from "./components/footer/footer";
-import Home from "./pages/home/home";
-import Employees from "./pages/employees/employees";
-import Services from "./pages/services/services";
-import ServiceInfo from "./pages/service-info/service-info";
-import Appointments from "./pages/appointments/appointments";
-import Auth from "./pages/auth/auth";
-import Profile from "./pages/profile/profile";
-import Admin from "./pages/admin-profile/admin-profile";
-import BookAppointment from "./pages/book-appointment/book-appointment";
-import AdminAdd from "./pages/admin-add/admin-add";
-import AdminDelete from "./pages/admin-delete/admin-delete";
-import AdminUpdate from "./pages/admin-update/admin-update";
-import { checkToken } from "./helpers/checkToken";
+import Footer from './components/footer/footer';
+import Home from './pages/home/home';
+import Employees from './pages/employees/employees';
+import Services from './pages/services/services';
+import ServiceInfo from './pages/service-info/service-info';
+import Appointments from './pages/appointments/appointments';
+import AboutUs from './pages/about-us/about-us';
+import Auth from './pages/auth/auth';
+import Profile from './pages/profile/profile';
+import Admin from './pages/admin-profile/admin-profile';
+import BookAppointment from './pages/book-appointment/book-appointment';
+import AdminAdd from './pages/admin-add/admin-add';
+import AdminDelete from './pages/admin-delete/admin-delete';
+import AdminUpdate from './pages/admin-update/admin-update';
+import { checkToken } from './helpers/checkToken';
 import './App.css';
+import Error from './pages/error/error';
 
 const App = () => {
   const [modalActive, setModalActive] = useState(false);
@@ -28,24 +30,24 @@ const App = () => {
 
   const setActive = () => {
     if(modalActive){
-      setModalActive(false)
+      setModalActive(false);
       document.body.style.overflowY = 'auto';
     } else {
-      setModalActive(true)
+      setModalActive(true);
       document.body.style.overflowY = 'hidden';
     }
-  }
+  };
 
   const setVisuallyChangerActive = () => {
     setChangerActive(!visuallyChangerActive);
     setBackgroundColor('white');
     setTextColor('black');
-  }
+  };
 
   const setVisualColor = (backgroundColor, txtColor) => {
     setBackgroundColor(backgroundColor);
     setTextColor(txtColor);
-  }
+  };
 
   useEffect(() => {
     function handleResize() {
@@ -54,34 +56,49 @@ const App = () => {
     window.addEventListener('resize', handleResize);
     const verifiedToken = checkToken();
     if (verifiedToken) {
-        setUser({userType:  verifiedToken.decodedToken.userType, firstName: verifiedToken.decodedToken.firstName ,secondName: verifiedToken.decodedToken.secondName, id: verifiedToken.decodedToken.userId});
+      setUser({
+        userType:  verifiedToken.decodedToken.userType, firstName: verifiedToken.decodedToken.firstName,
+        secondName: verifiedToken.decodedToken.secondName, id: verifiedToken.decodedToken.userId,
+      });
     }
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   useEffect(() => {
     if(windowWidth >= 1301){
-      setModalActive(false)
+      setModalActive(false);
       document.body.style.overflowY = 'auto';
     }
   }, [windowWidth]);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <div className="visually-block" style={ !!visuallyChangerActive ? {backgroundColor: backColor} : null}>
-          <button className="visually-changer" style={{backgroundColor: `${backColor}`, color: `${textColor}`, border: `1px solid ${textColor}`}} onClick={setVisuallyChangerActive}>РЕЖИМ ДЛЯ СЛАБОВИДЯЩИХ: {visuallyChangerActive ? "ВКЛ" : "ВЫКЛ"}</button>
+    <div className='App'>
+      <header className='App-header'>
+        <div className='visually-block' style={ !!visuallyChangerActive ? {backgroundColor: backColor} : null}>
+          <button className='visually-changer' tabIndex={1} style={{backgroundColor: `${backColor}`,
+            color: `${textColor}`, border: `1px solid ${textColor}`}} onClick={setVisuallyChangerActive}
+          >РЕЖИМ ДЛЯ СЛАБОВИДЯЩИХ: {visuallyChangerActive ? 'ВКЛ' : 'ВЫКЛ'}
+          </button>
           {
             !!visuallyChangerActive &&
             (
               <>
-              <button className="text-changer" style={{backgroundColor: 'white', color: 'black', border: '1px solid black'}} onClick={e => setVisualColor('white', 'black')}>А</button>
-              <button className="text-changer" style={{backgroundColor: 'black', color: 'white', border: '1px solid white'}} onClick={e => setVisualColor('black', 'white')}>А</button>
+                <button className='text-changer' style={{backgroundColor: 'white', color: 'black', border: '1px solid black'}}
+                  onClick={e => setVisualColor('white', 'black')}
+                >А
+                </button>
+                <button className='text-changer' style={{backgroundColor: 'black', color: 'white', border: '1px solid white'}}
+                  onClick={e => setVisualColor('black', 'white')}
+                >А
+                </button>
               </>
             )
           }
         </div>
-        <Nav setActive={setActive} modalActive={modalActive} user={user} backgroundStyle={ visuallyChangerActive ? {backgroundColor: `${backColor}`, backgroundImage: 'none'} : null} text={visuallyChangerActive ?  {color: `${textColor}`} : null}/>
+        <Nav setActive={setActive} modalActive={modalActive} user={user}
+          backgroundStyle={ visuallyChangerActive ? {backgroundColor: `${backColor}`, backgroundImage: 'none'} : null}
+          text={visuallyChangerActive ?  {color: `${textColor}`} : null}
+        />
       </header>
 
       <div className={ !modalActive ? 'modal-nav' : 'modal-nav aсtive'}>
@@ -95,37 +112,47 @@ const App = () => {
       </div>
 
       <main className='App-main'>
-          <Routes>
-            <Route path='/' element={<Home backgroundStyle={ visuallyChangerActive ? {backgroundImage: 'none', backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ?  {color: `${textColor}`} : null}/>}/>
-            <Route path='/home' element={<Home backgroundStyle={ visuallyChangerActive ? {backgroundImage: 'none', backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ?  {color: `${textColor}`} : null}/>}/>
-            <Route path='/employees' element={<Employees/>}/>
-            <Route path='/employees/:id/appointments' element={<Appointments/>}/>
-            <Route path='/services' element={<Services/>}/>
-            <Route path='/services/:id' element={<ServiceInfo/>}/>
-            <Route path='/auth' element={<Auth/>}/>
-            <Route path='/book-appointment' element={<BookAppointment/>}/>
-            {
-              user !== null && (<Route path={`/profile/${user.id}`} element={<Profile/>}/>)
-            }
-            {
-              user && user.userType === 'админ' && 
-              (
+        <Routes>
+          <Route path='/' element={<Home backgroundStyle={ visuallyChangerActive ? 
+            {backgroundImage: 'none', backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ?
+            {color: `${textColor}`} : null}/>}
+          />
+          <Route path='/home' element={<Home backgroundStyle={ visuallyChangerActive ?
+            {backgroundImage: 'none', backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ?
+            {color: `${textColor}`} : null}/>}
+          />
+          <Route path='/employees' element={<Employees/>}/>
+          <Route path='/employees/:id/appointments' element={<Appointments/>}/>
+          <Route path='/services' element={<Services/>}/>
+          <Route path='/services/:id' element={<ServiceInfo/>}/>
+          <Route path='/about-us' element={<AboutUs/>}/>
+          <Route path='/auth' element={<Auth/>}/>
+          <Route path='/book-appointment' element={<BookAppointment/>}/>
+          {
+            user !== null && (<Route path={`/profile/${user.id}`} element={<Profile/>}/>)
+          }
+          {
+            user && user.userType === 'админ' && 
+            (
               <>
                 <Route path='/admin' element={<Admin/>}/> 
                 <Route path='/admin/add' element={<AdminAdd/>}/>
                 <Route path='/admin/update' element={<AdminUpdate/>}/>
                 <Route path='/admin/delete' element={<AdminDelete/>}/>
               </> 
-              )
-            }
-          </Routes>
+            )
+          }
+          <Route path='*' element={<Error/>}/>
+        </Routes>
       </main>
 
       <footer className='App-footer'>
-        <Footer backgroundStyle={ visuallyChangerActive ? { backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ?  {color: `${textColor}`} : null}/>
+        <Footer backgroundStyle={ visuallyChangerActive ? { backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ? 
+          {color: `${textColor}`} : null}
+        />
       </footer>
     </div>
   );
-}
+};
 
 export default App;

@@ -1,7 +1,7 @@
 import 
 { BOOK_APPOINTMENT, GET_EMPLOYEES,
-GET_SERVICES, GET_SPECIALIZATIONS, SET_EMPLOYEES, SET_SERVICES, SET_SPECIALIZATIONS
-} from "../action-types/action-types";
+  GET_SERVICES, GET_SPECIALIZATIONS, SET_EMPLOYEES, SET_SERVICES, SET_SPECIALIZATIONS,
+} from '../action-types/action-types';
 
 //get and set list of employees
 export const getEmployees = () => {

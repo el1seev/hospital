@@ -13,32 +13,31 @@ const Auth = () => {
     event.preventDefault();
     const res = await authenticate({...form});
     if(res){
-      console.log(res, res.token);
       localStorage.setItem('token', res.token);
       navigate('/', { replace: true });
       window.location.reload();
     } 
-  }
+  };
 
   const changeHandler = event => {
-    setForm({ ...form, [event.target.name]: event.target.value })
-  }
+    setForm({ ...form, [event.target.name]: event.target.value });
+  };
 
   return (
     <div className='auth-page'>
       <div className='form-wrap'>
         <form className='form'>
           <label>Введите серию паспорта
-            <input onChange={changeHandler} type="text" id="passport" name="passport" placeholder="AB0000000"></input>
+            <input onChange={changeHandler} type='text' id='passport' name='passport' placeholder='AB0000000'></input>
           </label>
           <label>
-            <input onChange={changeHandler} type="password" id="password" name="password" placeholder="Пароль"></input>
+            <input onChange={changeHandler} type='password' id='password' name='password' placeholder='Пароль'></input>
           </label>
-            <button className="book-button" onClick={submitAuth}>Войти</button>
+          <button className='book-button' onClick={submitAuth}>Войти</button>
         </form>
       </div>
     </div>
   );
-}
+};
 
 export default Auth;

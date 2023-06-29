@@ -12,11 +12,11 @@ const UpdateService = (props) => {
   const setCurrent = async (id) => {
     const selectedService = props.services.find((service) => service._id === id);
     setCurrentService(selectedService);
-  }
+  };
 
   const changeHandler = event => {
-    setForm({ ...form, [event.target.name]: event.target.value })
-  }
+    setForm({ ...form, [event.target.name]: event.target.value });
+  };
 
   const submit = async (event) => {
     event.preventDefault();
@@ -25,35 +25,35 @@ const UpdateService = (props) => {
       navigate('/admin', { replace: true });
       window.location.reload();
     } 
-  }
+  };
 
   return (
     <div className='form-wrap'>
-    <form className='form'>
-      <h1>{props.operation}</h1>
-      <select onChange={(e) => setCurrent(e.target.value)} value={currentService ? currentService._id : ''}>
-  <option value="" disabled>Выберите услугу из выпадающего списка</option>
-  {props.services.map((service) => (
-    <option key={service._id} value={service._id}>
-      {service.name}
-    </option>
-  ))}
-</select>
-          {currentService !== null && (
-            <>
-                <label>Изменить название (текущее: {currentService.name})
-            <input onChange={changeHandler} type="text" id="name" name="name" placeholder="услуга"></input>
-          </label>
-          <label>Изменить изображение
-            <input onChange={changeHandler} type="text" id="image" name="image" placeholder="URL"></input>
-          </label>
-          <button className="book-button" onClick={submit}>Отправить</button>
-            </>
-          )}
+      <form className='form'>
+        <h1>{props.operation}</h1>
+        <select onChange={(e) => setCurrent(e.target.value)} value={currentService ? currentService._id : ''}>
+          <option value='' disabled>Выберите услугу из выпадающего списка</option>
+          {props.services.map((service) => (
+            <option key={service._id} value={service._id}>
+              {service.name}
+            </option>
+          ))}
+        </select>
+        {currentService !== null && (
+          <>
+            <label>Изменить название (текущее: {currentService.name})
+              <input onChange={changeHandler} type='text' id='name' name='name' placeholder='услуга'></input>
+            </label>
+            <label>Изменить изображение
+              <input onChange={changeHandler} type='text' id='image' name='image' placeholder='URL'></input>
+            </label>
+            <button className='book-button' onClick={submit}>Отправить</button>
+          </>
+        )}
           
-    </form>
+      </form>
     </div>
   );
-}
+};
 
 export default UpdateService;

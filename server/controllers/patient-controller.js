@@ -15,7 +15,7 @@ const createPatient = async (req, res) => {
     const user = new User({
       password: req.body.password,
       userType: 'пациент',
-      patientId: patient._id
+      patientId: patient._id,
     });
     await user.save();
     res.status(201).json(patient);
@@ -50,7 +50,7 @@ const getPatientById = async (req, res) => {
 // Обновление информации о пациенте
 const updatePatient = async (req, res) => {
   try {
-    const {id} = req.params;
+    const { id } = req.params;
     const patient = await Patient.findByIdAndUpdate(id, req.body, { new: true });
     if (!patient) {
       return res.status(404).json({ message: 'Пациент не найден' });
@@ -64,7 +64,7 @@ const updatePatient = async (req, res) => {
 // Удаление пациента
 const deletePatient = async (req, res) => {
   try {
-    const {id} = req.params;
+    const { id } = req.params;
     const patient = await Patient.findByIdAndDelete(id);
     if (!patient) {
       return res.status(404).json({ message: 'Пациент не найден' });
@@ -81,5 +81,5 @@ module.exports = {
   getAllPatients,
   getPatientById,
   updatePatient,
-  deletePatient
+  deletePatient,
 };

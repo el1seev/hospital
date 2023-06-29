@@ -16,12 +16,12 @@ const BookAppointment = () => {
   const dispatch = useDispatch();
 
   const filterBySpecialization = async (specializationId) => {
-    console.log(employees)
+    console.log(employees);
     const employeesBySpecialization = await employees.filter(( employee ) => {
       return employee.specializationId._id === specializationId;
-    })
+    });
     setEmployees(employeesBySpecialization);
-  }
+  };
 
   useEffect(() => {
     if(specializations.length === 0){
@@ -30,42 +30,42 @@ const BookAppointment = () => {
     if(employees.length === 0){
       dispatch(getEmployees());
     }
-  }, [])
+  }, []);
   
   return (
     <div className='book-appointment-page'>
       <ReceptionTel/>
       {
         filteredEmployees !== null ?
-        <div className='emlpoyees-wrap'>
-        { filteredEmployees.map( employee => (
-          <div className='doctor-wrap' key={employee._id}>
-            <div className='doctor-container'>
-              <div className='doctor-logo'> 
-                <DoctorLogo/>
+          <div className='emlpoyees-wrap'>
+            { filteredEmployees.map( employee => (
+              <div className='doctor-wrap' key={employee._id}>
+                <div className='doctor-container'>
+                  <div className='doctor-logo'> 
+                    <DoctorLogo/>
+                  </div>
+                  <div className='doctor-descriptions'>
+                    <p className='doctor-info'>{createInitials(employee.firstName, employee.secondName, employee.middleName)}</p>
+                    <p className='doctor-info'>{employee.specializationId.name}, {employee.shift} категория</p>
+                  </div>
+                  <Link to={`/employees/${employee._id}/appointments`} className='book-button'>Запись</Link>
+                </div>
               </div>
-              <div className='doctor-descriptions'>
-                <p className='doctor-info'>{createInitials(employee.firstName, employee.secondName, employee.middleName)}</p>
-                <p className='doctor-info'>{employee.specializationId.name}, {employee.shift} категория</p>
-              </div>
-              <Link to={`/employees/${employee._id}/appointments`} className='book-button'>Запись</Link>
-            </div>
+            ))}
           </div>
-        ))}
-        </div>
-        :
-        <div className='specializations-wrap'>
-        {
-          specializations.map( specialization => (
-            <div key={specialization._id} className='specialization-item' onClick={e => filterBySpecialization(specialization._id)}>
-              <p className='specialization-name'>{specialization.name}</p>
-            </div>
-          ))
-        }
-        </div>
+          :
+          <div className='specializations-wrap'>
+            {
+              specializations.map( specialization => (
+                <div key={specialization._id} className='specialization-item' onClick={e => filterBySpecialization(specialization._id)}>
+                  <p className='specialization-name'>{specialization.name}</p>
+                </div>
+              ))
+            }
+          </div>
       }
     </div>
   );
-}
+};
 
 export default BookAppointment;

@@ -1,4 +1,4 @@
-import { SET_SERVICES } from "../action-types/action-types";
+import { SET_SERVICES } from '../action-types/action-types';
 
 
 const initialState = {
@@ -7,13 +7,13 @@ const initialState = {
 
 const servicesReducer = (state = initialState, {type, payload}) => {
   switch (type) {
-    case SET_SERVICES:
-      return {
-        ...state,
-        services: payload,
-      };
-    default:
-      return state;
+  case SET_SERVICES:
+    return {
+      ...state,
+      services: payload,
+    };
+  default:
+    return state;
   }
 };
 

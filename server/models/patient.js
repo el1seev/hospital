@@ -1,55 +1,56 @@
 const mongoose = require('mongoose');
-const validatePassport  = require('../helpers/validatePassport');
+const validatePassport = require('../helpers/validatePassport');
 const validateName = require('../helpers/validateName');
 const validateBirth = require('../helpers/validateBirth');
 const validatePhoneNumber = require('../helpers/validatePhone');
 
 const Schema = mongoose.Schema;
 
-const PatientSchema = new Schema({
+const PatientSchema = new Schema(
+  {
     passportId: {
       type: String,
       required: [true, 'Введите номер паспорта'],
       validate: {
         validator: validatePassport,
-        message: "Некорректный номер паспорта"
+        message: 'Некорректный номер паспорта',
       },
-      unique: true
+      unique: true,
     },
     gender: {
       type: String,
       enum: ['М', 'Ж'],
       required: [true, 'Введите пол'],
-      default: 'М'
+      default: 'М',
     },
     firstName: {
       type: String,
       required: [true, 'Введите имя'],
       validate: {
         validator: validateName,
-        message: 'Некорректные данные'
-      }
+        message: 'Некорректные данные',
+      },
     },
     secondName: {
       type: String,
       required: [true, 'Введите фамилию'],
       validate: {
         validator: validateName,
-        message: 'Некорректные данные'
-      }
+        message: 'Некорректные данные',
+      },
     },
     middleName: {
       type: String,
       validate: {
         validator: validateName,
-        message: 'Некорректные данные'
-      }
+        message: 'Некорректные данные',
+      },
     },
     dateOfBirth: {
       type: String,
       validate: {
         validator: validateBirth,
-        message: 'Некорректная дата'
+        message: 'Некорректная дата',
       },
     },
     address: {
@@ -61,9 +62,11 @@ const PatientSchema = new Schema({
       unique: true,
       validate: {
         validator: validatePhoneNumber,
-        message: 'Некорректный номер телефона'
-      }
+        message: 'Некорректный номер телефона',
+      },
     },
-}, { timestamps: true });
+  },
+  { timestamps: true },
+);
 
 module.exports = mongoose.model('Patient', PatientSchema);

@@ -1,129 +1,135 @@
 const Service = require('../models/service');
 
 // Добавить новую услугу
-createService = async (req, res) => {
+const createService = async (req, res) => {
   try {
-  const { name, image, description } = req.body;
-  const service = new Service({ name, image, description });
+    const { name, image, description } = req.body;
+    const service = new Service({ name, image, description });
 
-  const savedService = await service.save();
+    const savedService = await service.save();
 
-  return res.status(201).json({ service: savedService });
+    return res.status(201).json({ service: savedService });
   } catch (error) {
-  return res.status(500).json({ message: 'Не удалось добавить услугу', error });
+    return res.status(500).json({ message: 'Не удалось добавить услугу', error });
   }
 };
 
-addServiceDescription = async (req, res) => {
+const addServiceDescription = async (req, res) => {
   try {
-  const { type, price } = req.body;
-  const { id } = req.params;
-  if( price <= 0){
-    return res.status(400).json({ message: 'Цена не может равнятся или быть меньше ноля' });
-  }
-  const newDescription = {type: type, price: Number(price)};
-  const service = await Service.findById(id);
+    const { type, price } = req.body;
+    const { id } = req.params;
+    if (price <= 0) {
+      return res.status(400).json({ message: 'Цена не может равнятся или быть меньше ноля' });
+    }
+    const newDescription = { type: type, price: Number(price) };
+    const service = await Service.findById(id);
 
-  if (!service) {
-    return res.status(404).json({ message: 'Услуга не найдена' });
-  }
+    if (!service) {
+      return res.status(404).json({ message: 'Услуга не найдена' });
+    }
 
-  service.description.push(newDescription);
-  
-  const savedService = await service.save();
+    service.description.push(newDescription);
 
-  return res.status(201).json({ service: savedService });
+    const savedService = await service.save();
+
+    return res.status(201).json({ service: savedService });
   } catch (error) {
-  return res.status(500).json({ message: 'Не удалось добавить услугу', error });
+    return res.status(500).json({ message: 'Не удалось добавить услугу', error });
   }
 };
 
 // Получить все услуги
-getAllServices = async (req, res) => {
+const getAllServices = async (req, res) => {
   try {
-  const services = await Service.find();
-  return res.status(200).json({ services });
+    const services = await Service.find();
+    return res.status(200).json({ services });
   } catch (error) {
-  return res.status(500).json({ message: 'Не удалось получить список услуг', error });
+    return res.status(500).json({ message: 'Не удалось получить список услуг', error });
   }
 };
 
 // Получить услугу по ID
-getServiceById = async (req, res) => {
+const getServiceById = async (req, res) => {
   try {
-  const { id } = req.params;
+    const { id } = req.params;
 
-  const service = await Service.findById(id);
+    const service = await Service.findById(id);
 
-  if (!service) {
-    return res.status(404).json({ message: 'Услуга не найдена' });
-  }
+    if (!service) {
+      return res.status(404).json({ message: 'Услуга не найдена' });
+    }
 
-  return res.status(200).json({ service });
+    return res.status(200).json({ service });
   } catch (error) {
-  return res.status(500).json({ message: 'Не удалось получить услугу', error });
+    return res.status(500).json({ message: 'Не удалось получить услугу', error });
   }
 };
 
 // Редактировать услугу
-updateService = async (req, res) => {
+const updateService = async (req, res) => {
   try {
-  const { id } = req.params;
+    const { id } = req.params;
 
-  const service = await Service.findByIdAndUpdate(id, req.body, {new: true});
+    const service = await Service.findByIdAndUpdate(id, req.body, { new: true });
 
-  if (!service) {
-    return res.status(404).json({ message: 'Услуга не найдена' });
-  }
-  const savedService = await service.save();
+    if (!service) {
+      return res.status(404).json({ message: 'Услуга не найдена' });
+    }
+    const savedService = await service.save();
 
-  return res.status(200).json({ service: savedService });
+    return res.status(200).json({ service: savedService });
   } catch (error) {
-  return res.status(500).json({ message: 'Не удалось обновить услугу', error });
+    return res.status(500).json({ message: 'Не удалось обновить услугу', error });
   }
 };
 
 //Обовить описание услуги
-updateServiceDescription = async (req, res) => {
+const updateServiceDescription = async (req, res) => {
   try {
-  const { id } = req.params;
-  const { type } = req.body;
+    const { id } = req.params;
+    const { type } = req.body;
 
-  const service = await Service.findById(id);
-  const description = service.description.map((i) => 
-    i.type === type ? i = req.body : i
-  );
-  if (!service) {
-    return res.status(404).json({ message: 'Услуга не найдена' });
-  }
+    const service = await Service.findById(id);
+    const description = service.description.map((i) => (i.type === type ? (i = req.body) : i));
+    if (!service) {
+      return res.status(404).json({ message: 'Услуга не найдена' });
+    }
 
-  service.description = description;
+    service.description = description;
 
-  const savedService = await service.save();
+    const savedService = await service.save();
 
-  return res.status(200).json({ service: savedService });
+    return res.status(200).json({ service: savedService });
   } catch (error) {
-  return res.status(500).json({ message: 'Не удалось обновить услугу', error });
+    return res.status(500).json({ message: 'Не удалось обновить услугу', error });
   }
 };
 
 // Удалить услугу
-deleteService = async (req, res) => {
+const deleteService = async (req, res) => {
   try {
-  const { id } = req.params;
+    const { id } = req.params;
 
-  const service = await Service.findById(id);
+    const service = await Service.findById(id);
 
-  if (!service) {
-    return res.status(404).json({ message: 'Услуга не найдена' });
-  }
+    if (!service) {
+      return res.status(404).json({ message: 'Услуга не найдена' });
+    }
 
-  await service.remove();
+    await service.remove();
 
-  return res.status(200).json({ message: 'Услуга удалена' });
+    return res.status(200).json({ message: 'Услуга удалена' });
   } catch (error) {
-  return res.status(500).json({ message: 'Не удалось удалить услугу', error });
+    return res.status(500).json({ message: 'Не удалось удалить услугу', error });
   }
 };
 
-module.exports = {getAllServices, deleteService, getServiceById, updateService, createService, addServiceDescription, updateServiceDescription};
+module.exports = {
+  getAllServices,
+  deleteService,
+  getServiceById,
+  updateService,
+  createService,
+  addServiceDescription,
+  updateServiceDescription,
+};

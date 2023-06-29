@@ -12,11 +12,11 @@ const UpdateSpecialization = (props) => {
   const setCurrent = async (id) => {
     const selectedSpecialization = props.specializations.find((specialization) => specialization._id === id);
     setCurrentSpecialization(selectedSpecialization);
-  }
+  };
 
   const changeHandler = event => {
-    setForm({ ...form, [event.target.name]: event.target.value })
-  }
+    setForm({ ...form, [event.target.name]: event.target.value });
+  };
 
   const submit = async (event) => {
     event.preventDefault();
@@ -25,32 +25,32 @@ const UpdateSpecialization = (props) => {
       navigate('/admin', { replace: true });
       window.location.reload();
     } 
-  }
+  };
 
   return (
     <div className='form-wrap'>
-    <form className='form'>
-      <h1>{props.operation}</h1>
-      <select onChange={(e) => setCurrent(e.target.value)} value={currentSpecialization ? currentSpecialization._id : ''}>
-  <option value="" disabled>Выберите специализацию из выпадающего списка</option>
-  {props.specializations.map((specialization) => (
-    <option key={specialization._id} value={specialization._id}>
-      {specialization.name}
-    </option>
-  ))}
-</select>
-          {currentSpecialization !== null && (
-            <>
-                <label>Изменить название (текущее: {currentSpecialization.name})
-            <input onChange={changeHandler} type="text" id="name" name="name" placeholder="хирург"></input>
-          </label>
-          <button className="book-button" onClick={submit}>Отправить</button>
-            </>
-          )}
+      <form className='form'>
+        <h1>{props.operation}</h1>
+        <select onChange={(e) => setCurrent(e.target.value)} value={currentSpecialization ? currentSpecialization._id : ''}>
+          <option value='' disabled>Выберите специализацию из выпадающего списка</option>
+          {props.specializations.map((specialization) => (
+            <option key={specialization._id} value={specialization._id}>
+              {specialization.name}
+            </option>
+          ))}
+        </select>
+        {currentSpecialization !== null && (
+          <>
+            <label>Изменить название (текущее: {currentSpecialization.name})
+              <input onChange={changeHandler} type='text' id='name' name='name' placeholder='хирург'></input>
+            </label>
+            <button className='book-button' onClick={submit}>Отправить</button>
+          </>
+        )}
           
-    </form>
+      </form>
     </div>
   );
-}
+};
 
 export default UpdateSpecialization;

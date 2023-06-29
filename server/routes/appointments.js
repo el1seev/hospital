@@ -10,7 +10,13 @@ const { isPatient } = require('../middleware/checkRole');
 router.get('/api/appointments/:id', checkExpiredAppointments, appointmentController.getAppointmentsByDoctor);
 
 // Получить талоны конкретного пользователя
-router.get('/api/myappointments/:id', checkExpiredAppointments, authenticate, isPatient, appointmentController.getAppointmentsByPatient);
+router.get(
+  '/api/myappointments/:id',
+  checkExpiredAppointments,
+  authenticate,
+  isPatient,
+  appointmentController.getAppointmentsByPatient,
+);
 
 // Отмена талона пациентом
 router.put('/api/myappointments/cancel/:id', authenticate, isPatient, appointmentController.cancelAppointment);

@@ -1,8 +1,8 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 
-import employeesReducer from "./employees-reducer";
-import servicesReducer from "./services-reducer";
-import specializationsReducer from "./specializations";
+import employeesReducer from './employees-reducer';
+import servicesReducer from './services-reducer';
+import specializationsReducer from './specializations';
 
 export const reducer = combineReducers({
   employees: employeesReducer,

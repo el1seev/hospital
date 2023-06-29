@@ -12,4 +12,4 @@ export const checkToken = () => {
       return {token: token, decodedToken: decodedToken};
     }
   }
-}
+};

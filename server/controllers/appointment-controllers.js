@@ -7,23 +7,19 @@ const getAppointmentsByDoctor = async (req, res) => {
   try {
     const doctorId = req.params.id;
     // Находим все талоны для данного врача
-    const appointments = await Appointment
-                                          .find({ doctorId: doctorId })
-                                          .populate({
-                                            path: 'doctorId',
-                                            select: 'firstName secondName middleName',
-                                            populate: {
-                                              path: 'specializationId',
-                                              select: 'name'
-                                            },
-                                            options: {
-                                              strictPopulate: false 
-                                            }
-                                          });
+    const appointments = await Appointment.find({ doctorId: doctorId }).populate({
+      path: 'doctorId',
+      select: 'firstName secondName middleName',
+      populate: {
+        path: 'specializationId',
+        select: 'name',
+      },
+      options: {
+        strictPopulate: false,
+      },
+    });
     // Фильтруем занятые талоны
-    const availableAppointments = appointments.filter(
-      (appointment) => appointment.status === 'свободен'
-    );
+    const availableAppointments = appointments.filter((appointment) => appointment.status === 'свободен');
 
     res.status(200).json({
       success: true,
@@ -40,19 +36,17 @@ const getAppointmentsByPatient = async (req, res) => {
     const userId = req.params.id;
     const user = await User.findById(userId);
 
-    const appointments = await Appointment
-                                          .find({ patientId: user.patientId })
-                                          .populate({
-                                            path: 'doctorId',
-                                            select: 'firstName secondName middleName',
-                                            populate: {
-                                              path: 'specializationId',
-                                              select: 'name'
-                                            },
-                                            options: {
-                                              strictPopulate: false 
-                                            }
-                                          });
+    const appointments = await Appointment.find({ patientId: user.patientId }).populate({
+      path: 'doctorId',
+      select: 'firstName secondName middleName',
+      populate: {
+        path: 'specializationId',
+        select: 'name',
+      },
+      options: {
+        strictPopulate: false,
+      },
+    });
 
     res.status(200).json({
       success: true,
@@ -61,7 +55,7 @@ const getAppointmentsByPatient = async (req, res) => {
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }
-}
+};
 
 //Освободить талон
 const cancelAppointment = async (req, res) => {
@@ -72,10 +66,10 @@ const cancelAppointment = async (req, res) => {
     const patientId = user.patientId;
 
     const updatedAppointment = await Appointment.findOneAndUpdate(
-      { _id: appointmentId, patientId: patientId, status: "занят" },
+      { _id: appointmentId, patientId: patientId, status: 'занят' },
       { $unset: { patientId: 1 } },
-      { status: "свободен" },
-      { new: true }
+      { status: 'свободен' },
+      { new: true },
     );
 
     if (!updatedAppointment) {
@@ -83,10 +77,9 @@ const cancelAppointment = async (req, res) => {
     }
     res.status(200).json(updatedAppointment);
   } catch (err) {
-    console.error(err);
     res.status(500).json({ success: false, error: err.message });
   }
-}
+};
 
 //Занять талон
 const bookAppointment = async (req, res) => {
@@ -101,21 +94,21 @@ const bookAppointment = async (req, res) => {
     if (appointment.status === 'занят') {
       return res.status(400).json({ message: 'Талон уже занят' });
     }
-    const patient = await Patient.findOne({passportId: passportId});
-    const patientAppointments = await Appointment
-                                                .find({ patientId: patient._id })
-                                                .populate({
-                                                  path: 'doctorId',
-                                                  select: 'firstName secondName middleName',
-                                                  populate: {
-                                                    path: 'specializationId',
-                                                    select: 'name'
-                                                  },
-                                                  options: {
-                                                    strictPopulate: false 
-                                                  }
-                                                });
-    const doctorAppointments = patientAppointments.filter(appointment => appointment.doctorId === appointment.doctorId);
+    const patient = await Patient.findOne({ passportId: passportId });
+    const patientAppointments = await Appointment.find({ patientId: patient._id }).populate({
+      path: 'doctorId',
+      select: 'firstName secondName middleName',
+      populate: {
+        path: 'specializationId',
+        select: 'name',
+      },
+      options: {
+        strictPopulate: false,
+      },
+    });
+    const doctorAppointments = patientAppointments.filter(
+      (appointment) => appointment.doctorId === appointment.doctorId,
+    );
     if (doctorAppointments.length > 0) {
       return res.status(400).json({ message: 'Пациент уже занял талон у данного врача' });
     }
@@ -129,4 +122,4 @@ const bookAppointment = async (req, res) => {
   }
 };
 
-module.exports = {getAppointmentsByDoctor, getAppointmentsByPatient, cancelAppointment, bookAppointment};
+module.exports = { getAppointmentsByDoctor, getAppointmentsByPatient, cancelAppointment, bookAppointment };

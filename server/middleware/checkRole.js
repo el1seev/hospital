@@ -16,4 +16,4 @@ const isPatient = (req, res, next) => {
   return res.status(403).json({ message: 'Доступ запрещен' });
 };
 
-module.exports = { isAdmin, isPatient};
+module.exports = { isAdmin, isPatient };

@@ -11,7 +11,7 @@ const UpdateEmployee = (props) => {
   const [form , setForm] = useState({
     passportId: '', firstName: '', secondName: '', middleName: '',
     categoryId: '', specializationId: '', shift: ''});
-  const [currentEmployee, setCurrentEmployee] = useState(null)
+  const [currentEmployee, setCurrentEmployee] = useState(null);
   const [categories, setCategories] = useState(null);
   const specializations = useSelector(state => state.specializations.specializations);
   const employees = useSelector(state => state.employees.employees);
@@ -22,16 +22,16 @@ const UpdateEmployee = (props) => {
   const handleCategories = async () => {
     const categories = await fetchCategories();
     setCategories(categories);
-  }
+  };
 
   const setCurrent = async (id) => {
     const selectedEmployee = employees.find((employee) => employee._id === id);
     setCurrentEmployee(selectedEmployee);
-  }
+  };
 
   const changeHandler = event => {
-    setForm({ ...form, [event.target.name]: event.target.value })
-  }
+    setForm({ ...form, [event.target.name]: event.target.value });
+  };
 
   const submit = async (event) => {
     event.preventDefault();
@@ -40,7 +40,7 @@ const UpdateEmployee = (props) => {
       navigate('/admin', { replace: true });
       window.location.reload();
     } 
-  }
+  };
 
   useEffect(() => {
     handleCategories();
@@ -50,37 +50,40 @@ const UpdateEmployee = (props) => {
     if(employees.length === 0){
       dispatch(getEmployees());
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
 
   return (
     <div className='form-wrap'>
-    <form className='form'>
-      <h1>{props.operation}</h1>
-      <select onChange={(e) => setCurrent(e.target.value)} value={currentEmployee ? currentEmployee._id : ''}>
-  <option value="" disabled>Выберите врача из выпадающего списка</option>
-  {employees.map((employee) => (
-    <option key={employee._id} value={employee._id}>
-      {createInitials(employee.secondName, employee.firstName, employee.middleName)}
-    </option>
-  ))}
-</select>
-          {currentEmployee !== null && (
-            <>
-                <label>Изменить серию паспорта(текущий: {currentEmployee.passportId})
-            <input onChange={changeHandler} type="text" id="passportId" name="passportId" placeholder="AB0000000"></input>
-          </label>
-          <label>Изменить имя (текущее: {currentEmployee.firstName})
-            <input onChange={changeHandler} type="text" id="firstName" name="firstName" placeholder="Сергей"></input>
-          </label>
-          <label>Изменить фамилию (текущее: {currentEmployee.secondName})
-            <input onChange={changeHandler} type="text" id="secondName" name="secondName" placeholder="Елисеев"></input>
-          </label>
-          <label>Изменить отчество (текущее: {currentEmployee.middleName})
-            <input onChange={changeHandler} type="text" id="middleName" name="middleName" placeholder="Геннадьевич"></input>
-          </label>
-          <label>Изменить специализацию из выпадающего списка (текущая: {currentEmployee.specializationId.name})
-            <input onChange={changeHandler} type="text" list='optionsSpec' id="specializationId" name="specializationId" placeholder='нажмите два раза'>
-            </input>
+      <form className='form'>
+        <h1>{props.operation}</h1>
+        <select onChange={(e) => setCurrent(e.target.value)} value={currentEmployee ? currentEmployee._id : ''}>
+          <option value='' disabled>Выберите врача из выпадающего списка</option>
+          {employees.map((employee) => (
+            <option key={employee._id} value={employee._id}>
+              {createInitials(employee.secondName, employee.firstName, employee.middleName)}
+            </option>
+          ))}
+        </select>
+        {currentEmployee !== null && (
+          <>
+            <label>Изменить серию паспорта(текущий: {currentEmployee.passportId})
+              <input onChange={changeHandler} type='text' id='passportId' name='passportId' placeholder='AB0000000'></input>
+            </label>
+            <label>Изменить имя (текущее: {currentEmployee.firstName})
+              <input onChange={changeHandler} type='text' id='firstName' name='firstName' placeholder='Сергей'></input>
+            </label>
+            <label>Изменить фамилию (текущее: {currentEmployee.secondName})
+              <input onChange={changeHandler} type='text' id='secondName' name='secondName' placeholder='Елисеев'></input>
+            </label>
+            <label>Изменить отчество (текущее: {currentEmployee.middleName})
+              <input onChange={changeHandler} type='text' id='middleName' name='middleName' placeholder='Геннадьевич'></input>
+            </label>
+            <label>Изменить специализацию из выпадающего списка (текущая: {currentEmployee.specializationId.name})
+              <input onChange={changeHandler} type='text' list='optionsSpec' id='specializationId'
+                name='specializationId' placeholder='нажмите два раза'
+              >
+              </input>
               <datalist id='optionsSpec'>
                 {
                   specializations.map( specialization => (
@@ -88,31 +91,31 @@ const UpdateEmployee = (props) => {
                   ))
                 }
               </datalist>
-          </label>
-          <label>Изменить категорию(текущая: {currentEmployee.categoryId.name})
-            <input onChange={changeHandler} type="text" list='optionsCategory' id="categoryId" name="categoryId" placeholder="2-я">
-            </input>
+            </label>
+            <label>Изменить категорию(текущая: {currentEmployee.categoryId.name})
+              <input onChange={changeHandler} type='text' list='optionsCategory' id='categoryId' name='categoryId' placeholder='2-я'>
+              </input>
               <datalist id='optionsCategory'>
                 { categories !== null && categories.map( category => (
                   <option value={category._id} key={category._id}>{category.name}</option>
                 ))}
               </datalist>
-          </label>
-          <label>Изменить смену(текущая: {currentEmployee.shift})
-            <input onChange={changeHandler} type="text" list='optionsShift' id="shift" name="shift" placeholder="1-я">
-            </input>
+            </label>
+            <label>Изменить смену(текущая: {currentEmployee.shift})
+              <input onChange={changeHandler} type='text' list='optionsShift' id='shift' name='shift' placeholder='1-я'>
+              </input>
               <datalist id='optionsShift'>
                 <option value='1-я'>1-я</option>
                 <option value='2-я'>2-я</option>
               </datalist>
-          </label>
-          <button className="book-button" onClick={submit}>Отправить</button>
-            </>
-          )}
+            </label>
+            <button className='book-button' onClick={submit}>Отправить</button>
+          </>
+        )}
           
-    </form>
+      </form>
     </div>
   );
-}
+};
 
 export default UpdateEmployee;

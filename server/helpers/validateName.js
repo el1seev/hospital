@@ -1,7 +1,7 @@
 const validateName = (name) => {
   const regex = /^[a-zA-Zа-яА-ЯёЁ]{2,}$/;
 
-  if (!name || typeof name !== "string" || !regex.test(name)) {
+  if (!name || typeof name !== 'string' || !regex.test(name)) {
     return false;
   }
 
@@ -16,6 +16,6 @@ const validateName = (name) => {
   }
 
   return true;
-}
+};
 
 module.exports = validateName;

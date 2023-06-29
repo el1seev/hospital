@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const passport = require('../config/passport');
 
 const { isAdmin } = require('../middleware/checkRole');
 const { authenticate } = require('../middleware/passport-auth');

@@ -1,0 +1,16 @@
+{
+  "semi": true,
+  "arrowParens": "always",
+  "trailingComma": "all",
+  "singleQuote": true,
+  "printWidth": 120,
+  "tabWidth": 2,
+  "overrides": [
+    {
+      "files": "*.js",
+      "options": {
+        "ignorePattern": ["req", "res", "next", "err", "module"]
+      }
+    }
+  ]
+}

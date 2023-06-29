@@ -14,30 +14,31 @@ const Employees = () => {
 
   useEffect(() => {
     dispatch(getEmployees());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className='employees-page'>
       <ReceptionTel/>
       <div className='emlpoyees-wrap'>
-      { employees.map( employee => (
-        <div className='doctor-wrap' key={employee._id}>
-          <div className='doctor-container'>
-            <div className='doctor-logo'> 
-              <DoctorLogo/>
+        { employees.map( employee => (
+          <div className='doctor-wrap' key={employee._id}>
+            <div className='doctor-container'>
+              <div className='doctor-logo'> 
+                <DoctorLogo/>
+              </div>
+              <div className='doctor-descriptions'>
+                <p className='doctor-info'>{createInitials(employee.firstName, employee.secondName, employee.middleName) }</p>
+                <p className='doctor-info'>{employee.specializationId.name}, {employee.shift} категория</p>
+              </div>
+              <Link to={`/employees/${employee._id}/appointments`} className='book-button'>Запись</Link>
             </div>
-            <div className='doctor-descriptions'>
-              <p className='doctor-info'>{createInitials(employee.firstName, employee.secondName, employee.middleName) }</p>
-              <p className='doctor-info'>{employee.specializationId.name}, {employee.shift} категория</p>
-            </div>
-            <Link to={`/employees/${employee._id}/appointments`} className='book-button'>Запись</Link>
           </div>
-        </div>
-      ))}
+        ))}
       </div>
     </div>
   );
-}
+};
 
 
 export default Employees;

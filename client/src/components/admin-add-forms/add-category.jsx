@@ -10,8 +10,8 @@ const AddCategory = (props) => {
 
 
   const changeHandler = event => {
-    setForm({ ...form, [event.target.name]: event.target.value })
-  }
+    setForm({ ...form, [event.target.name]: event.target.value });
+  };
 
   const submit = async (event) => {
     event.preventDefault();
@@ -20,19 +20,19 @@ const AddCategory = (props) => {
       navigate('/admin', { replace: true });
       window.location.reload();
     } 
-  }
+  };
 
   return (
     <div className='form-wrap'>
-    <form className='form'>
-      <h1>{props.operation}</h1>
-      <label>Введите название
-                <input onChange={changeHandler} type="text" id="name" name="name" placeholder="название"></input>
-              </label>
-          <button className="book-button" onClick={submit}>Отправить</button>
-    </form>
+      <form className='form'>
+        <h1>{props.operation}</h1>
+        <label>Введите название
+          <input onChange={changeHandler} type='text' id='name' name='name' placeholder='название'></input>
+        </label>
+        <button className='book-button' onClick={submit}>Отправить</button>
+      </form>
     </div>
   );
-}
+};
 
 export default AddCategory;

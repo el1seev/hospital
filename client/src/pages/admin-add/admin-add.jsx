@@ -14,16 +14,16 @@ const AdminAdd = () => {
   
   const setAdminOperation = (value) => {
     setOperation(value);
-  }
+  };
 
 
   return (
-    <div className="admin-add-page">
-      <div className="admin-nav">
+    <div className='admin-add-page'>
+      <div className='admin-nav'>
         <ul className='nav-list'>
           {['добавить врача', 'добавить пациента', 'добавить услугу', 'добавить описание услуги', 
-          'добавить специализацию', 'добавить категорию'].map( (value) => 
-          (<li className='list-child'><button className='nav-link' onClick={e => setAdminOperation(value)}>{value}</button></li>))
+            'добавить специализацию', 'добавить категорию'].map( (value) => 
+            (<li className='list-child'><button className='nav-link' onClick={e => setAdminOperation(value)}>{value}</button></li>))
           }
         </ul>
       </div>
@@ -36,6 +36,6 @@ const AdminAdd = () => {
       {operation === 'добавить описание услуги' && (<AddServiceDescription operation={operation}/>)}
     </div>
   );
-}
+};
 
 export default AdminAdd;

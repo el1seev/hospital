@@ -1,6 +1,7 @@
-import { call, put, fork, takeEvery } from "redux-saga/effects";
-import { GET_SERVICES, SET_SERVICES } from "../action-types/action-types";
-import { fetchServices } from "../../api/fetchData";
+import { call, put, fork, takeEvery } from 'redux-saga/effects';
+
+import { GET_SERVICES, SET_SERVICES } from '../action-types/action-types';
+import { fetchServices } from '../../api/fetchData';
 
 function* getServices() {
   const response = yield call(fetchServices);

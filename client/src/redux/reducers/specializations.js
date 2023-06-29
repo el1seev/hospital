@@ -1,4 +1,4 @@
-import { SET_SPECIALIZATIONS } from "../action-types/action-types";
+import { SET_SPECIALIZATIONS } from '../action-types/action-types';
 
 
 const initialState = {
@@ -7,13 +7,13 @@ const initialState = {
 
 const specializationsReducer = (state = initialState, {type, payload}) => {
   switch (type) {
-    case SET_SPECIALIZATIONS:
-      return {
-        ...state,
-        specializations: payload,
-      };
-    default:
-      return state;
+  case SET_SPECIALIZATIONS:
+    return {
+      ...state,
+      specializations: payload,
+    };
+  default:
+    return state;
   }
 };
 

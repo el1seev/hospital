@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 
+import { useDispatch, useSelector } from 'react-redux';
+
 import UpdateEmployee from '../../components/admin-update-forms/update-employee';
 import UpdatePatient from '../../components/admin-update-forms/update-patient';
 import { fetchAllPatients, fetchCategories } from '../../api/fetchData';
-import { useDispatch, useSelector } from 'react-redux';
 import { getServices, getSpecializations } from '../../redux/actions/actions';
 import UpdateService from '../../components/admin-update-forms/service-update';
 import UpdateSpecialization from '../../components/admin-update-forms/specialization-update';
@@ -24,16 +25,16 @@ const AdminUpdate = () => {
   const handlePatients = async () => {
     const patients = await fetchAllPatients();
     setPatients(patients);
-  }
+  };
 
   const handleCategories = async () => {
     const categories = await fetchCategories();
     setCategories(categories); 
-  }
+  };
 
   const setAdminOperation = (value) => {
     setOperation(value);
-  }
+  };
 
   useEffect(() => {
     if(specializations.length === 0){
@@ -43,16 +44,17 @@ const AdminUpdate = () => {
       dispatch(getServices());
     }
     handleCategories();
-    handlePatients()
-  },[]);
+    handlePatients();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
-    <div className="admin-add-page">
-      <div className="admin-nav">
+    <div className='admin-add-page'>
+      <div className='admin-nav'>
         <ul className='nav-list'>
           {['изменить врача', 'изменить пациента', 'изменить услугу', 'изменить описание услуги', 
-          'изменить специализацию', 'изменить категорию'].map( (value) => 
-          (<li className='list-child'><button className='nav-link' onClick={e => setAdminOperation(value)}>{value}</button></li>))
+            'изменить специализацию', 'изменить категорию'].map( (value) => 
+            (<li className='list-child'><button className='nav-link' onClick={e => setAdminOperation(value)}>{value}</button></li>))
           }
         </ul>
       </div>
@@ -65,6 +67,6 @@ const AdminUpdate = () => {
       {operation === 'изменить категорию' && (<UpdateCategory operation={operation} categories={categories}/>)}
     </div>
   );
-}
+};
 
 export default AdminUpdate;

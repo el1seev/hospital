@@ -10,35 +10,37 @@ const Services = () => {
   const services = useSelector(state => state.services.services);
   const dispatch = useDispatch();
 
-  const handleServices = async () => {
-    await dispatch(getServices());
-  }
+  const handleServices = () => {
+    dispatch(getServices());
+  };
+
   useEffect(() => {
     handleServices();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className='services-page'>
       <ReceptionTel/>
       {
         !services ?
-        <p className='loading'>Загрузка...</p>
-        :
-        <div className='services-wrap'>
-        {
-          services.map( service => (
-          <Link to={`/services/${service._id}`} key={service._id} className='service-wrap'>
-              <div className='service-container' style={{backgroundImage: `url(${service.image})`}} alt={`${service.name}`}>
-                <div className='service-name-wrap'>
-                  <p className='service-name'>{service.name}</p>
-                </div>
-            </div>
-          </Link>
-          ))
-        }
-        </div>
+          <p className='loading'>Загрузка...</p>
+          :
+          <div className='services-wrap'>
+            {
+              services.map( service => (
+                <Link to={`/services/${service._id}`} key={service._id} className='service-wrap'>
+                  <div className='service-container' style={{backgroundImage: `url(${service.image})`}} alt={`${service.name}`}>
+                    <div className='service-name-wrap'>
+                      <p className='service-name'>{service.name}</p>
+                    </div>
+                  </div>
+                </Link>
+              ))
+            }
+          </div>
       }
     </div>
   );
-}
+};
 
 export default Services;

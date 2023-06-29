@@ -21,11 +21,11 @@ const Appointments = () => {
   const setActive = (appointmentCartId) => {
     setAppointmentId(appointmentCartId);
     setStateForm(!formActive);
-  }
+  };
 
   const handleClick = (e) => {
     e.stopPropagation();
-  }
+  };
   
   const submitBook = (event) => {
     event.preventDefault();
@@ -34,57 +34,57 @@ const Appointments = () => {
       navigate(`/employees/${id}/appointments`, { replace: true });
       window.location.reload();
     }
-  }
+  };
 
   const handleDoctorsAppointments = async () => {
     const res = await fetchAppointments(id);
     setAppointments(res.appointments);
-  }
+  };
 
 
   const changeHandler = event => {
-    setForm({ ...form, [event.target.name]: event.target.value })
-  }
+    setForm({ ...form, [event.target.name]: event.target.value });
+  };
 
   useEffect(() => {
     handleDoctorsAppointments();
-  }, [id])
+  }, [id]);
 
   return (
     <div className='appointments-page'>
       {
         !appointments 
-      ?
-      <p className='loading'>Загрузка...</p>
-      :
-        !formActive ?
-        <>
-        <ReceptionTel/>
-        <div className='appointments-wrap'>
-        {
-          appointments.map( appointment => (
-            <AppointmentItem appointment={appointment} setActive={setActive} key={appointment._id}/>
-          ))
-        }
-        </div>
-        </>
-        :
-        <>
-        <div className='book-form' onClick={setActive}>
-          <button className='cancel-button' onClick={setActive}>
-            <CancelButton />
-          </button>
-          <form className='form' onClick={handleClick}>
-            <label>Введите серию паспорта
-              <input onChange={changeHandler} type="text" id="passport" name="passport" placeholder="AB0000000"/>
-            </label>
-            <button className="book-button" onClick={submitBook}>записаться</button>
-          </form>
-        </div>
-        </>
+          ?
+          <p className='loading'>Загрузка...</p>
+          :
+          !formActive ?
+            <>
+              <ReceptionTel/>
+              <div className='appointments-wrap'>
+                {
+                  appointments.map( appointment => (
+                    <AppointmentItem appointment={appointment} setActive={setActive} key={appointment._id}/>
+                  ))
+                }
+              </div>
+            </>
+            :
+            <>
+              <div className='book-form' onClick={setActive}>
+                <button className='cancel-button' onClick={setActive}>
+                  <CancelButton />
+                </button>
+                <form className='form' onClick={handleClick}>
+                  <label>Введите серию паспорта
+                    <input onChange={changeHandler} type='text' id='passport' name='passport' placeholder='AB0000000'/>
+                  </label>
+                  <button className='book-button' onClick={submitBook}>записаться</button>
+                </form>
+              </div>
+            </>
       }
     </div>
   );
-}
+};
 
 export default Appointments;
