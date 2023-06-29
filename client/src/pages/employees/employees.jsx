@@ -8,7 +8,7 @@ import ReceptionTel from '../../components/reception-tel/reception-tel';
 import createInitials from '../../helpers/createInitials';
 import './employees.css';
 
-const Employees = () => {
+const Employees = (props) => {
   const employees = useSelector(state => state.employees.employees);
   const dispatch = useDispatch();
 
@@ -18,20 +18,25 @@ const Employees = () => {
   }, []);
 
   return (
-    <div className='employees-page'>
-      <ReceptionTel/>
+    <div className='employees-page' style={props.backgroundStyle}>
+      <ReceptionTel back={props.backgroundStyle} txt={props.text}/>
       <div className='emlpoyees-wrap'>
         { employees.map( employee => (
           <div className='doctor-wrap' key={employee._id}>
-            <div className='doctor-container'>
-              <div className='doctor-logo'> 
-                <DoctorLogo/>
+            <div className={props.backgroundStyle !== null ? `doctor-container_${props.backgroundStyle.backgroundColor}` : 'doctor-container'}>
+              {
+                props.backgroundStyle === null && (<div className='doctor-logo'><DoctorLogo/></div>)
+              }
+              <div className='doctor-descriptions' style={props.backgroundStyle}>
+                <p className={'doctor-info'} style={props.text}>
+                  {createInitials(employee.firstName, employee.secondName, employee.middleName) }</p>
+                <p className={'doctor-info'} style={props.text}>{employee.specializationId.name}, {employee.shift} категория</p>
               </div>
-              <div className='doctor-descriptions'>
-                <p className='doctor-info'>{createInitials(employee.firstName, employee.secondName, employee.middleName) }</p>
-                <p className='doctor-info'>{employee.specializationId.name}, {employee.shift} категория</p>
-              </div>
-              <Link to={`/employees/${employee._id}/appointments`} className='book-button'>Запись</Link>
+              <Link to={`/employees/${employee._id}/appointments`} style={props.text} 
+                className={props.backgroundStyle !== null ? `book-button_${props.backgroundStyle.backgroundColor}` : 'book-button'}
+              >
+              Запись
+              </Link>
             </div>
           </div>
         ))}

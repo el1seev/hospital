@@ -6,7 +6,7 @@ import ReceptionTel from '../../components/reception-tel/reception-tel';
 import './services.css';
 import { getServices } from '../../redux/actions/actions';
 
-const Services = () => {
+const Services = (props) => {
   const services = useSelector(state => state.services.services);
   const dispatch = useDispatch();
 
@@ -19,8 +19,8 @@ const Services = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <div className='services-page'>
-      <ReceptionTel/>
+    <div className='services-page' style={props.backgroundStyle}>
+      <ReceptionTel back={props.backgroundStyle} txt={props.text}/>
       {
         !services ?
           <p className='loading'>Загрузка...</p>
@@ -29,9 +29,12 @@ const Services = () => {
             {
               services.map( service => (
                 <Link to={`/services/${service._id}`} key={service._id} className='service-wrap'>
-                  <div className='service-container' style={{backgroundImage: `url(${service.image})`}} alt={`${service.name}`}>
-                    <div className='service-name-wrap'>
-                      <p className='service-name'>{service.name}</p>
+                  <div className={props.backgroundStyle !== null ?
+                    `service-container_${props.backgroundStyle.backgroundColor}`
+                    : 'service-container'} style={props.backgroundColor !== null ?
+                    props.backgroundStyle : {backgroundImage: `url(${service.image})`}} alt={`${service.name}`}>
+                    <div className='service-name-wrap' style={props.backgroundStyle}>
+                      <p className='service-name' style={props.text}>{service.name}</p>
                     </div>
                   </div>
                 </Link>

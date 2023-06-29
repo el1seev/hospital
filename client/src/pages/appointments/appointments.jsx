@@ -9,7 +9,7 @@ import { bookAppointment } from '../../api/sendData';
 import './appointments.css';
 import AppointmentItem from '../../components/appointment-item/appointment-item';
 
-const Appointments = () => {
+const Appointments = (props) => {
   const [appointments, setAppointments] = useState(null);
   const [appointmentId, setAppointmentId] = useState('');
   const [formActive, setStateForm] = useState(false);
@@ -55,7 +55,7 @@ const Appointments = () => {
       {
         !appointments 
           ?
-          <p className='loading'>Загрузка...</p>
+          <p className='loading' style={props.text}>Загрузка...</p>
           :
           !formActive ?
             <>

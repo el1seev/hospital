@@ -75,7 +75,7 @@ const App = () => {
     <div className='App'>
       <header className='App-header'>
         <div className='visually-block' style={ !!visuallyChangerActive ? {backgroundColor: backColor} : null}>
-          <button className='visually-changer' tabIndex={1} style={{backgroundColor: `${backColor}`,
+          <button className='visually-changer' style={{backgroundColor: `${backColor}`,
             color: `${textColor}`, border: `1px solid ${textColor}`}} onClick={setVisuallyChangerActive}
           >РЕЖИМ ДЛЯ СЛАБОВИДЯЩИХ: {visuallyChangerActive ? 'ВКЛ' : 'ВЫКЛ'}
           </button>
@@ -101,54 +101,106 @@ const App = () => {
         />
       </header>
 
-      <div className={ !modalActive ? 'modal-nav' : 'modal-nav aсtive'}>
+      <div className={ !modalActive ? 'modal-nav' : 'modal-nav aсtive'} style={{backgroundColor: `${backColor}`}}>
         <ul>
-          <li className='list-child'><Link to='/home' className='nav-link' onClick={setActive}>Главная</Link></li>
-          <li className='list-child'><Link to='/book-appointment' className='nav-link' onClick={setActive}>Запись на приём</Link></li>
-          <li className='list-child'><Link to='/services' className='nav-link' onClick={setActive}>Услуги</Link></li>
-          <li className='list-child'><Link to='/employees' className='nav-link' onClick={setActive}>Сотрудники</Link></li>
-          <li className='list-child'><Link to='/about-us' className='nav-link' onClick={setActive}>О нас</Link></li>
+          <li className='list-child'><Link to='/home' className='nav-link' onClick={setActive} style={{color: `${textColor}`}}>Главная</Link></li>
+          <li className='list-child'>
+            <Link to='/book-appointment' className='nav-link' onClick={setActive}
+              style={{color: `${textColor}`}}>Запись на приём
+            </Link>
+          </li>
+          <li className='list-child'><Link to='/services' className='nav-link' onClick={setActive} style={{color: `${textColor}`}}>Услуги</Link></li>
+          <li className='list-child'>
+            <Link to='/employees' className='nav-link' onClick={setActive} style={{color: `${textColor}`}}>
+              Сотрудники
+            </Link>
+          </li>
+          <li className='list-child'><Link to='/about-us' className='nav-link' onClick={setActive} style={{color: `${textColor}`}}>О нас</Link></li>
         </ul>
       </div>
 
       <main className='App-main'>
         <Routes>
           <Route path='/' element={<Home backgroundStyle={ visuallyChangerActive ? 
-            {backgroundImage: 'none', backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ?
-            {color: `${textColor}`} : null}/>}
+            {backgroundImage: 'none', backgroundColor: `${backColor}`, boxShadow: 'none'} : null} text={visuallyChangerActive ?
+            {color: `${textColor}`, webkitTextStroke: '0cm', textShadow: 'none'} : null}/>}
           />
           <Route path='/home' element={<Home backgroundStyle={ visuallyChangerActive ?
             {backgroundImage: 'none', backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ?
-            {color: `${textColor}`} : null}/>}
+            {color: `${textColor}`, webkitTextStroke: '0cm', textShadow: 'none'} : null}/>}
           />
-          <Route path='/employees' element={<Employees/>}/>
-          <Route path='/employees/:id/appointments' element={<Appointments/>}/>
-          <Route path='/services' element={<Services/>}/>
-          <Route path='/services/:id' element={<ServiceInfo/>}/>
-          <Route path='/about-us' element={<AboutUs/>}/>
-          <Route path='/auth' element={<Auth/>}/>
-          <Route path='/book-appointment' element={<BookAppointment/>}/>
+          <Route path='/employees' element={<Employees backgroundStyle={ visuallyChangerActive ? 
+            {backgroundImage: 'none', backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ?
+            {color: `${textColor}`, webkitTextStroke: '0cm', textShadow: 'none'} : null}/>}
+          />
+          <Route path='/employees/:id/appointments' element={<Appointments backgroundStyle={ visuallyChangerActive ? 
+            {backgroundImage: 'none', backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ?
+            {color: `${textColor}`, webkitTextStroke: '0cm', textShadow: 'none'} : null}/>}
+          />
+          <Route path='/services' element={<Services backgroundStyle={ visuallyChangerActive ? 
+            {backgroundImage: 'none', backgroundColor: `${backColor}`, boxShadow: 'none'} : null} text={visuallyChangerActive ?
+            {color: `${textColor}`, webkitTextStroke: '0cm', textShadow: 'none'} : null}/>}
+          />
+          <Route path='/services/:id' element={<ServiceInfo backgroundStyle={ visuallyChangerActive ? 
+            {backgroundImage: 'none', backgroundColor: `${backColor}`, boxShadow: 'none'} : null} text={visuallyChangerActive ?
+            {color: `${textColor}`, webkitTextStroke: '0cm', textShadow: 'none'} : null}/>}
+          />
+          <Route path='/about-us' element={<AboutUs backgroundStyle={ visuallyChangerActive ? 
+            {backgroundImage: 'none', backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ?
+            {color: `${textColor}`, webkitTextStroke: '0cm', textShadow: 'none'} : null}/>}
+          />
+          <Route path='/auth' element={<Auth backgroundStyle={ visuallyChangerActive ? 
+            {backgroundImage: 'none', backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ?
+            {color: `${textColor}`, webkitTextStroke: '0cm', textShadow: 'none'} : null}/>}
+          />
+          <Route path='/book-appointment' element={<BookAppointment backgroundStyle={ visuallyChangerActive ? 
+            {backgroundImage: 'none', backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ?
+            {color: `${textColor}`, webkitTextStroke: '0cm', textShadow: 'none'} : null}/>}
+          />
           {
-            user !== null && (<Route path={`/profile/${user.id}`} element={<Profile/>}/>)
+            user !== null && (
+              <Route path={`/profile/${user.id}`} element={
+                <Profile backgroundStyle={ visuallyChangerActive ? 
+                  {backgroundImage: 'none', backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ?
+                  {color: `${textColor}`, webkitTextStroke: '0cm', textShadow: 'none'} : null}/>
+              }
+              />
+            )
           }
           {
             user && user.userType === 'админ' && 
             (
               <>
-                <Route path='/admin' element={<Admin/>}/> 
-                <Route path='/admin/add' element={<AdminAdd/>}/>
-                <Route path='/admin/update' element={<AdminUpdate/>}/>
-                <Route path='/admin/delete' element={<AdminDelete/>}/>
+                <Route path='/admin' element={
+                  <Admin backgroundStyle={ visuallyChangerActive ? 
+                    {backgroundImage: 'none', backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ?
+                    {color: `${textColor}`, webkitTextStroke: '0cm', textShadow: 'none'} : null}/>
+                }/> 
+                <Route path='/admin/add' element={<AdminAdd backgroundStyle={ visuallyChangerActive ? 
+                  {backgroundImage: 'none', backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ?
+                  {color: `${textColor}`, webkitTextStroke: '0cm', textShadow: 'none'} : null}/>
+                }/>
+                <Route path='/admin/update' element={<AdminUpdate backgroundStyle={ visuallyChangerActive ? 
+                  {backgroundImage: 'none', backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ?
+                  {color: `${textColor}`, webkitTextStroke: '0cm', textShadow: 'none'} : null}/>
+                }/>
+                <Route path='/admin/delete' element={<AdminDelete backgroundStyle={ visuallyChangerActive ? 
+                  {backgroundImage: 'none', backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ?
+                  {color: `${textColor}`, webkitTextStroke: '0cm', textShadow: 'none'} : null}/>
+                }/>
               </> 
             )
           }
-          <Route path='*' element={<Error/>}/>
+          <Route path='*' element={<Error backgroundStyle={ visuallyChangerActive ? 
+            {backgroundImage: 'none', backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ?
+            {color: `${textColor}`, webkitTextStroke: '0cm', textShadow: 'none'} : null}/>
+          }/>
         </Routes>
       </main>
 
       <footer className='App-footer'>
         <Footer backgroundStyle={ visuallyChangerActive ? { backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ? 
-          {color: `${textColor}`} : null}
+          {color: `${textColor}`, webkitTextStroke: '0cm', textShadow: 'none'} : null}
         />
       </footer>
     </div>

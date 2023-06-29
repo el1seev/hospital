@@ -27,18 +27,32 @@
   height: 300px;
 }
 
-.doctor-container
+.doctor-container, .doctor-container_white, .doctor-container_black
 {
   display: flex;
   box-sizing: border-box;
   height: 100%;
   width: 100%;
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid #000000;
   border-radius: 25px;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.doctor-container
+{
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid #000000;
+}
+
+.doctor-container_white
+{
+  border: 1px solid #000000;
+}
+
+.doctor-container_black
+{
+  border: 1px solid #ffffff;
 }
 
 .doctor-logo
@@ -67,22 +81,38 @@
   font-size: calc(16px + 2 * (100vw/ 1440))
 }
 
-.book-button
+.book-button, .book-button_white, .book-button_black
 {
   display: inline-block;
   margin: 15px 10px 10px 10px;
   padding: 10px 20px;
-  color: #fff;
-  -webkit-text-stroke: 0.5px #9c9c9c;
-  border: none;
   text-decoration: none;
   font-size: calc(16px + 2 * (100vw/ 1440));
   font-weight: bold;
   border-radius: 10px;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
   text-transform: uppercase;
-  background: rgba(0, 0, 0, 0.5);
   transition: 0.2s;
+}
+
+.book-button
+{
+  color: #fff;
+  -webkit-text-stroke: 0.5px #9c9c9c;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+}
+
+.book-button_white
+{
+  border: 0.5px solid #000000;
+  background: rgb(255, 251, 251);
+}
+
+.book-button_black
+{
+  border: 0.5px solid #ffffff;
+  background: rgb(0, 0, 0);
 }
 
 .book-button:hover

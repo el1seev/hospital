@@ -14,39 +14,39 @@ const Nav = (props) => {
 
       <ul className='nav-list'>
         <li className='list-child'>
-          <Link to='/home' className={props.text === null ? 'nav-link' : `nav-link_${props.text.color}`} tabIndex={2}>
+          <Link to='/home' className='nav-link' style={props.text}>
           Главная
           </Link>
         </li>
         <li className='list-child'>
-          <Link to='/book-appointment' className={props.text === null ? 'nav-link' : `nav-link_${props.text.color}`} tabIndex={3}>
+          <Link to='/book-appointment' className='nav-link' style={props.text}>
             Запись на приём
           </Link>
         </li>
         <li className='list-child'>
-          <Link to='/services' className={props.text === null ? 'nav-link' : `nav-link_${props.text.color}`} tabIndex={4}>
+          <Link to='/services' className='nav-link' style={props.text}>
           Услуги
           </Link>
         </li>
         <li className='list-child'>
-          <Link to='/employees' className={props.text === null ? 'nav-link' : `nav-link_${props.text.color}`} tabIndex={5}>
+          <Link to='/employees' className='nav-link' style={props.text}>
           Сотрудники
           </Link>
         </li>
         <li className='list-child'>
-          <Link to='/about-us' className={props.text === null ? 'nav-link' : `nav-link_${props.text.color}`} tabIndex={6}>
+          <Link to='/about-us' className='nav-link' style={props.text}>
           О нас
           </Link>
         </li>
       </ul>
 
       <ul className='nav-tel'>
-        <li className='tel-list'><p className={props.text === null ? 'nav-tel-text' : `nav-tel-text_${props.text.color}`}>
+        <li className='tel-list'><p className='nav-tel-text' style={props.text}>
           Горячая линия:
-        </p><span className={props.text === null ? 'tel' : `tel_${props.text.color}`}>+375(29)xxx-xx-xx</span>
+        </p><span className='tel' style={props.text}>+375(29)xxx-xx-xx</span>
         </li>
-        <li className='tel-list'><p className={props.text === null ? 'nav-tel-text' : `nav-tel-text_${props.text.color}`}>
-          Анонимный звонок:</p><span className={props.text === null ? 'tel' : `tel_${props.text.color}`}>
+        <li className='tel-list'><p className='nav-tel-text' style={props.text}>
+          Анонимный звонок:</p><span className='tel' style={props.text}>
           +375(29)xxx-xx-xx</span>
         </li>
       </ul>
@@ -54,15 +54,15 @@ const Nav = (props) => {
       <div className='profile-wrap'>
         {
           !props.user ?
-            <Link className={props.text === null ? 'entire-profile' : `entire-profile_${props.text.color}`} to='/auth' tabIndex={7}>Вход</Link>
+            <Link className='entire-profile' to='/auth' style={props.text}>Вход</Link>
             :
             props.user.userType !== 'админ' ?
-              <Link className={props.text === null ? 'entire-profile' : `entire-profile_${props.text.color}`}
-                to={`/profile/${props.user.id}`}>{props.user.secondName} tabIndex={7}
+              <Link className='entire-profile' style={props.text}
+                to={`/profile/${props.user.id}`}>{props.user.secondName}
               </Link>
               :
-              <Link className={props.text === null ? 'entire-profile' : `entire-profile_${props.text.color}`}
-                to={'/admin'}>{props.user.userType} tabIndex={7}
+              <Link className='entire-profile' style={props.text}
+                to={'/admin'}>{props.user.userType}
               </Link>
         }
       </div>

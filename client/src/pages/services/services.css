@@ -26,7 +26,7 @@
   height: 230px;
 }
 
-.service-container
+.service-container, .service-container_white, .service-container_black
 {
   display: flex;
   box-sizing: border-box;
@@ -34,11 +34,25 @@
   width: 100%;
   background-size: cover;
   background-position: 50%;
-  border: 1px solid #000000;
   border-radius: 25px;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.service-container
+{
+  border: 1px solid #000000;
+}
+
+.service-container_white
+{
+  border: 1px solid #000000;
+}
+
+.service-container_black
+{
+  border: 1px solid #ffffff;
 }
 
 .service-name-wrap

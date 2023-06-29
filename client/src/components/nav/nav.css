@@ -66,26 +66,7 @@ a
   color: #FFFFFF;
 }
 
-.nav-link_black, .nav-tel-text_black, .tel_black, .entire-profile_black
-{
-  color: #000000;
-  -webkit-text-stroke:0cm;
-  text-shadow:none;
-}
-
-.nav-link_black:hover, .entire-profile_black:hover
-{
-  color: #000000;
-  border-bottom: 1px solid black;
-}
-
-.nav-link_white:hover, .entire-profile_white:hover
-{
-  color: #FFFFFF;
-  border-bottom: 1px solid #ffffff;
-}
-
-.nav-link_white, .nav-tel-text_white, .tel_white, .entire-profile_white
+.white
 {
   color: #FFFFFF;
   -webkit-text-stroke:0cm;
@@ -100,7 +81,7 @@ a
   align-items: center;
 }
 
-.nav-tel-text, .nav-tel-text_black, .nav-tel-text_white
+.nav-tel-text
 {
   font-style: normal;
   font-weight: 700;
@@ -116,7 +97,7 @@ a
   color: #7DC07F;
 }
 
-.tel, .tel_black, .tel_white
+.tel
 {
   font-style: normal;
   font-weight: 700;
@@ -142,7 +123,7 @@ a
 
 }
 
-.entire-profile, .entire-profile_black, .entire-profile_white
+.entire-profile
 {
   font-style: normal;
   font-weight: 700;

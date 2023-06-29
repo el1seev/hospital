@@ -6,21 +6,21 @@ import './home.css';
 const Home = (props) => {
   return (
     <div className='home' style={props.backgroundStyle}>
-      <p className={props.text === null ? 'schedule' : `schedule_${props.text.color}`}>ВРЕМЯ РАБОТЫ:<br/> ПН-ПТ с 8:00 до 17:00</p>
+      <p className='schedule' style={props.text}>ВРЕМЯ РАБОТЫ:<br/> ПН-ПТ с 8:00 до 17:00</p>
       <ul className='main-nav'>
         <li>
-          <Link to='/book-appointment' className={props.text === null ? 'main-nav-li' : `main-nav-li_${props.text.color}`}>
+          <Link to='/book-appointment' className='main-nav-li' style={props.text}>
           Запись на приём
           </Link>
         </li>
-        <li><Link to='/services' className={props.text === null ? 'main-nav-li' : `main-nav-li_${props.text.color}`}>Услуги</Link></li>
-        <li><Link to='/employees' className={props.text === null ? 'main-nav-li' : `main-nav-li_${props.text.color}`}>Сотрудники</Link></li>
-        <li><Link to='/about-us' className={props.text === null ? 'main-nav-li' : `main-nav-li_${props.text.color}`}>О нас</Link></li>
+        <li><Link to='/services' className='main-nav-li' style={props.text}>Услуги</Link></li>
+        <li><Link to='/employees' className='main-nav-li' style={props.text}>Сотрудники</Link></li>
+        <li><Link to='/about-us' className='main-nav-li' style={props.text}>О нас</Link></li>
       </ul>
 
       <div className='address-wrap'>
         {props.text === null && <Mark className='mark'/>}
-        <p className={props.text === null ? 'address' : `address_${props.text.color}`}>г. Брест, ул. Пушкина, д. 35</p>
+        <p className='address' style={props.text}>г. Брест, ул. Пушкина, д. 35</p>
       </div>
     </div>
   );

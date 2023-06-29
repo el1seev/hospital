@@ -19,7 +19,7 @@
   width: fit-content;
 }
 
-.main-nav-li, .main-nav-li_black, .main-nav-li_white
+.main-nav-li
 {
   display: block;
   width: fit-content;
@@ -31,7 +31,7 @@
   margin-top: 5px;
 }
 
-.schedule, .schedule_black, .schedule_white
+.schedule
 {
   font-style: normal;
   font-weight: 700;
@@ -47,32 +47,6 @@
   text-shadow: 0px 6px 6px rgba(0, 0, 0, 0.25);
 }
 
-.main-nav-li_black, .schedule_black, .address_black
-{
-  color: #000000;
-  -webkit-text-stroke:0cm;
-  text-shadow:none;
-}
-
-.main-nav-li_white, .schedule_white, .address_white
-{
-  color: #FFFFFF;
-  -webkit-text-stroke:0cm;
-  text-shadow:none;
-}
-
-.main-nav-li_black:hover
-{
-  color: #000000;
-  border-bottom: 1px solid black;
-}
-
-.main-nav-li_white:hover
-{
-  color: #FFFFFF;
-  border-bottom: 1px solid #ffffff;
-}
-
 
 .address-wrap
 {
@@ -84,7 +58,7 @@
   margin: 30px 0px 10px 0px;
 }
 
-.address, .address_black, .address_white
+.address
 {
   font-style: normal;
   font-weight: 700;
