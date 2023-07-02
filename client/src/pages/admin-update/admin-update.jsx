@@ -12,7 +12,7 @@ import UpdateCategory from '../../components/admin-update-forms/category-update'
 import UpdateServiceDescription from '../../components/admin-update-forms/description-update';
 
 
-const AdminUpdate = () => {
+const AdminUpdate = (props) => {
 
   const [operation, setOperation] = useState('изменить врача');
   const [patients, setPatients] = useState(null);
@@ -54,7 +54,11 @@ const AdminUpdate = () => {
         <ul className='nav-list'>
           {['изменить врача', 'изменить пациента', 'изменить услугу', 'изменить описание услуги', 
             'изменить специализацию', 'изменить категорию'].map( (value) => 
-            (<li className='list-child'><button className='nav-link' onClick={e => setAdminOperation(value)}>{value}</button></li>))
+            (<li className='list-child'>
+              <button className='nav-link' onClick={e => setAdminOperation(value)}>
+                {value}
+              </button>
+            </li>))
           }
         </ul>
       </div>

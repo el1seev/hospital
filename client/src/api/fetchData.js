@@ -55,6 +55,7 @@ export const fetchAppointmentsByPatientId = async () => {
         `http://localhost:5000/api/myappointments/${verifiedToken.decodedToken.userId}`,
         { headers: { Authorization: `Bearer ${verifiedToken.token}` } }
       );
+      console.log(response.data)
       return response.data;
     }
   } catch (error) {

@@ -19,15 +19,34 @@
   margin: 50px 30px 50px 30px;
 }
 
-.specialization-item
+.specialization-item, .specialization-item_white, .specialization-item_black
 {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.8);
   border-radius: 1.5em;
   width: 100%;
   transition: 0.2s;
+  cursor: pointer;
+}
+
+.specialization-item
+{
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.specialization-item_white
+{
+  background-color: rgba(255, 255, 255);
+  color: black;
+  border: 1px solid #000000;
+}
+
+.specialization-item_black
+{
+  background-color: rgba(0, 0, 0);
+  color: rgb(255, 255, 255);
+  border: 1px solid #ffffff;
 }
 
 .specialization-item:hover

@@ -1,6 +1,7 @@
-const CancelButton = () => {
+const CancelButton = (props) => {
   return (
-    <svg className='cancel-svg' fill='#ffffff' viewBox='0 0 32 32' version='1.1' xmlns='http://www.w3.org/2000/svg' stroke='#ffffff'>
+    <svg className='cancel-svg' fill={props.buttonColor ? props.buttonColor.color :'#ffffff'} viewBox='0 0 32 32' version='1.1'
+      xmlns='http://www.w3.org/2000/svg' stroke={props.buttonColor ? props.buttonColor.color :'#ffffff'}>
       <g id='SVGRepo_bgCarrier' stroke-width='0'/>
       <g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'/>
       <g id='SVGRepo_iconCarrier'> 

@@ -2,7 +2,7 @@ import { Link} from 'react-router-dom';
 
 import './admin-profile.css';
 
-const Admin = () => {
+const Admin = (props) => {
 
   return (
     <div className='admin-page'>

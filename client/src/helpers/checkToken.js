@@ -9,6 +9,7 @@ export const checkToken = () => {
       localStorage.removeItem('token');
       window.location.href = '/';
     } else {
+      console.log(decodedToken.userId);
       return {token: token, decodedToken: decodedToken};
     }
   }

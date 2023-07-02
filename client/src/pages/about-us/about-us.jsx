@@ -3,9 +3,9 @@ import './about_us.css';
 const AboutUs = (props) => {
   return (
     <div className='about_us' style={props.backgroundStyle}>
-      <p className='schedule'>ВРЕМЯ РАБОТЫ:<br/> ПН-ПТ с 8:00 до 17:00</p>
-      <div className='about-wrap'>
-        <div className='about-info'>
+      <p className='schedule' style={props.text}>ВРЕМЯ РАБОТЫ:<br/> ПН-ПТ с 8:00 до 17:00</p>
+      <div className='about-wrap' style={props.backgroundStyle}>
+        <div className='about-info' style={props.text}>
           Добро пожаловать в нашу поликлинику!
           <br/>
           Мы заботимся о здоровье наших пациентов и стремимся обеспечить им высококачественное медицинское обслуживание.<br/>

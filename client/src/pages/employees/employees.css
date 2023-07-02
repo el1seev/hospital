@@ -92,6 +92,7 @@
   border-radius: 10px;
   text-transform: uppercase;
   transition: 0.2s;
+  cursor: pointer;
 }
 
 .book-button

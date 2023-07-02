@@ -5,9 +5,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import ReceptionTel from '../../components/reception-tel/reception-tel';
 import { fetchAppointments } from '../../api/fetchData';
 import CancelButton from '../../assets/svgs/cancel-button';
-import { bookAppointment } from '../../api/sendData';
-import './appointments.css';
+import { bookAppointment } from '../../api/operations-update';
 import AppointmentItem from '../../components/appointment-item/appointment-item';
+import './appointments.css';
 
 const Appointments = (props) => {
   const [appointments, setAppointments] = useState(null);
@@ -51,7 +51,7 @@ const Appointments = (props) => {
   }, [id]);
 
   return (
-    <div className='appointments-page'>
+    <div className='appointments-page' style={props.backgroundStyle}>
       {
         !appointments 
           ?
@@ -59,26 +59,35 @@ const Appointments = (props) => {
           :
           !formActive ?
             <>
-              <ReceptionTel/>
+              <ReceptionTel back={props.backgroundStyle} txt={props.text}/>
               <div className='appointments-wrap'>
                 {
                   appointments.map( appointment => (
-                    <AppointmentItem appointment={appointment} setActive={setActive} key={appointment._id}/>
+                    <AppointmentItem back={props.backgroundStyle} txt={props.text}
+                      appointment={appointment} setActive={setActive} key={appointment._id}
+                    />
                   ))
                 }
               </div>
             </>
             :
             <>
-              <div className='book-form' onClick={setActive}>
+              <div className='book-form' onClick={setActive} style={props.backgroundStyle}>
                 <button className='cancel-button' onClick={setActive}>
-                  <CancelButton />
+                  <CancelButton buttonColor={props.text}/>
                 </button>
-                <form className='form' onClick={handleClick}>
-                  <label>Введите серию паспорта
-                    <input onChange={changeHandler} type='text' id='passport' name='passport' placeholder='AB0000000'/>
+                <form className={props.backgroundStyle ? `form_${props.backgroundStyle.backgroundColor}` : 'form'} onClick={handleClick}>
+                  <label style={props.text}>Введите серию паспорта
+                    <input onChange={changeHandler} type='text' id='passport' name='passport' placeholder='AB0000000'
+                      style={props.text !== null ? {...props.text, border: `2px solid ${props.text.color}`} : null}
+                    />  
                   </label>
-                  <button className='book-button' onClick={submitBook}>записаться</button>
+                  
+                  <button className={props.backgroundStyle ? `book-button_${props.backgroundStyle.backgroundColor}` : 'book-button'}
+                    onClick={submitBook} style={props.text}
+                  >
+                  записаться
+                  </button>
                 </form>
               </div>
             </>

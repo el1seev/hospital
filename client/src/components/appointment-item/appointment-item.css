@@ -1,7 +1,6 @@
 
-.appointment-item
+.appointment-item, .appointment-item_white, .appointment-item_black
 {
-  background: rgba(0, 0, 0, 0.8);
   border-radius: 25px;
   height: 100%;
   display: flex;
@@ -9,6 +8,23 @@
   justify-content: center;
   height: 225px;
   transition: 0.2s;
+}
+
+.appointment-item
+{
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.appointment-item_white
+{
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(0, 0, 0);
+}
+
+.appointment-item_black
+{
+  background-color: black;
+  border: 1px solid rgb(255, 255, 255);
 }
 
 .appointment-item:hover
@@ -34,12 +50,11 @@
   font-size: calc(16px + 2 * (100vw/ 1440)); 
 }
 
-.appointment-button
+.appointment-button, .appointment-button_white, .appointment-button_black
 {
   display: inline-block;
   margin: 15px 10px 10px 10px;
   padding: 10px 20px;
-  color: #fff;
   -webkit-text-stroke: 0.5px #9c9c9c;
   border: none;
   text-decoration: none;
@@ -48,8 +63,28 @@
   border-radius: 10px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
   text-transform: uppercase;
-  background: rgba(100, 100, 100, 0.6);
   transition: 0.2s;
+  cursor: pointer;
+}
+
+.appointment-button
+{
+  background: rgba(100, 100, 100, 0.6);
+  color: #fff;
+}
+
+.appointment-button_white
+{
+  background-color: #ffffff;
+  border: 1.5px solid black;
+  -webkit-text-stroke: 0.5px #9c9c9c;
+}
+
+.appointment-button_black
+{
+  background-color: black;
+  -webkit-text-stroke: 0.5px #9c9c9c;
+  border: 1.5px solid rgb(255, 255, 255);
 }
 
 .appointment-button:hover

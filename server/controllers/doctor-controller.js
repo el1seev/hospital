@@ -31,7 +31,9 @@ const getAllDoctors = async (req, res) => {
 // Получение информации о конкретном враче
 const getDoctorById = async (req, res) => {
   try {
-    const doctor = await Doctor.findById(req.params.id);
+    const doctor = await Doctor.findById(req.params.id)
+      .populate('specializationId', 'name')
+      .populate('categoryId', 'name');
     if (!doctor) {
       return res.status(404).json({ message: 'Врач не найден' });
     }

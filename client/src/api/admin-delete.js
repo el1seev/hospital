@@ -1,6 +1,6 @@
 import { checkToken } from '../helpers/checkToken';
 
-import { deleteCategory, deleteEmployee, deletePatient, deleteService, deleteSpecialization } from './sendData';
+import { deleteCategory, deleteEmployee, deletePatient, deleteService, deleteSpecialization } from './operations-delete';
 
 export const adminDeleteOperations = async (args) => {
   const verifiedToken = checkToken();

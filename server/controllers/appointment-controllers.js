@@ -10,10 +10,16 @@ const getAppointmentsByDoctor = async (req, res) => {
     const appointments = await Appointment.find({ doctorId: doctorId }).populate({
       path: 'doctorId',
       select: 'firstName secondName middleName',
-      populate: {
-        path: 'specializationId',
-        select: 'name',
-      },
+      populate: [
+        {
+          path: 'specializationId',
+          select: 'name',
+        },
+        {
+          path: 'categoryId',
+          select: 'name',
+        },
+      ],
       options: {
         strictPopulate: false,
       },
@@ -35,14 +41,19 @@ const getAppointmentsByPatient = async (req, res) => {
   try {
     const userId = req.params.id;
     const user = await User.findById(userId);
-
     const appointments = await Appointment.find({ patientId: user.patientId }).populate({
       path: 'doctorId',
       select: 'firstName secondName middleName',
-      populate: {
-        path: 'specializationId',
-        select: 'name',
-      },
+      populate: [
+        {
+          path: 'specializationId',
+          select: 'name',
+        },
+        {
+          path: 'categoryId',
+          select: 'name',
+        },
+      ],
       options: {
         strictPopulate: false,
       },
@@ -98,10 +109,16 @@ const bookAppointment = async (req, res) => {
     const patientAppointments = await Appointment.find({ patientId: patient._id }).populate({
       path: 'doctorId',
       select: 'firstName secondName middleName',
-      populate: {
-        path: 'specializationId',
-        select: 'name',
-      },
+      populate: [
+        {
+          path: 'specializationId',
+          select: 'name',
+        },
+        {
+          path: 'categoryId',
+          select: 'name',
+        },
+      ],
       options: {
         strictPopulate: false,
       },

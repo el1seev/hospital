@@ -130,11 +130,11 @@ const App = () => {
             {color: `${textColor}`, webkitTextStroke: '0cm', textShadow: 'none'} : null}/>}
           />
           <Route path='/employees' element={<Employees backgroundStyle={ visuallyChangerActive ? 
-            {backgroundImage: 'none', backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ?
+            {backgroundImage: 'none', backgroundColor: `${backColor}`, boxShadow: 'none'} : null} text={visuallyChangerActive ?
             {color: `${textColor}`, webkitTextStroke: '0cm', textShadow: 'none'} : null}/>}
           />
           <Route path='/employees/:id/appointments' element={<Appointments backgroundStyle={ visuallyChangerActive ? 
-            {backgroundImage: 'none', backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ?
+            {backgroundImage: 'none', backgroundColor: `${backColor}`, boxShadow: 'none'} : null} text={visuallyChangerActive ?
             {color: `${textColor}`, webkitTextStroke: '0cm', textShadow: 'none'} : null}/>}
           />
           <Route path='/services' element={<Services backgroundStyle={ visuallyChangerActive ? 
@@ -154,11 +154,11 @@ const App = () => {
             {color: `${textColor}`, webkitTextStroke: '0cm', textShadow: 'none'} : null}/>}
           />
           <Route path='/book-appointment' element={<BookAppointment backgroundStyle={ visuallyChangerActive ? 
-            {backgroundImage: 'none', backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ?
+            {backgroundImage: 'none', backgroundColor: `${backColor}`, boxShadow: 'none'} : null} text={visuallyChangerActive ?
             {color: `${textColor}`, webkitTextStroke: '0cm', textShadow: 'none'} : null}/>}
           />
           {
-            user !== null && (
+            user && user.userType === 'пациент' && (
               <Route path={`/profile/${user.id}`} element={
                 <Profile backgroundStyle={ visuallyChangerActive ? 
                   {backgroundImage: 'none', backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ?
@@ -171,23 +171,10 @@ const App = () => {
             user && user.userType === 'админ' && 
             (
               <>
-                <Route path='/admin' element={
-                  <Admin backgroundStyle={ visuallyChangerActive ? 
-                    {backgroundImage: 'none', backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ?
-                    {color: `${textColor}`, webkitTextStroke: '0cm', textShadow: 'none'} : null}/>
-                }/> 
-                <Route path='/admin/add' element={<AdminAdd backgroundStyle={ visuallyChangerActive ? 
-                  {backgroundImage: 'none', backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ?
-                  {color: `${textColor}`, webkitTextStroke: '0cm', textShadow: 'none'} : null}/>
-                }/>
-                <Route path='/admin/update' element={<AdminUpdate backgroundStyle={ visuallyChangerActive ? 
-                  {backgroundImage: 'none', backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ?
-                  {color: `${textColor}`, webkitTextStroke: '0cm', textShadow: 'none'} : null}/>
-                }/>
-                <Route path='/admin/delete' element={<AdminDelete backgroundStyle={ visuallyChangerActive ? 
-                  {backgroundImage: 'none', backgroundColor: `${backColor}`} : null} text={visuallyChangerActive ?
-                  {color: `${textColor}`, webkitTextStroke: '0cm', textShadow: 'none'} : null}/>
-                }/>
+                <Route path='/admin' element={<Admin/>}/> 
+                <Route path='/admin/add' element={<AdminAdd/>}/>
+                <Route path='/admin/update' element={<AdminUpdate/>}/>
+                <Route path='/admin/delete' element={<AdminDelete/>}/>
               </> 
             )
           }

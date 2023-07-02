@@ -25,7 +25,7 @@ const UpdateEmployee = (props) => {
   };
 
   const setCurrent = async (id) => {
-    const selectedEmployee = employees.find((employee) => employee._id === id);
+    const selectedEmployee = await employees.find((employee) => employee._id === id);
     setCurrentEmployee(selectedEmployee);
   };
 
@@ -92,7 +92,7 @@ const UpdateEmployee = (props) => {
                 }
               </datalist>
             </label>
-            <label>Изменить категорию(текущая: {currentEmployee.categoryId.name})
+            <label>Изменить категорию(текущая: {currentEmployee !== null ? currentEmployee.categoryId.name : 'хз'})
               <input onChange={changeHandler} type='text' list='optionsCategory' id='categoryId' name='categoryId' placeholder='2-я'>
               </input>
               <datalist id='optionsCategory'>

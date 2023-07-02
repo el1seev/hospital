@@ -1,7 +1,7 @@
 import { checkToken } from '../helpers/checkToken';
 import { removeEmptyFields } from '../helpers/filterObjects';
 
-import { UpdateCategory, UpdateDoctor, UpdatePatient, UpdateService, UpdateServiceDescription, UpdateSpecialization } from './sendData';
+import { UpdateCategory, UpdateDoctor, UpdatePatient, UpdateService, UpdateServiceDescription, UpdateSpecialization } from './operations-update';
 
 export const adminUpdateOperations = async (args) => {
   const verifiedToken = checkToken();
